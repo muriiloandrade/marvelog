@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  server:
+    container_name: marvelog-api
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    env_file: .env.dev
+    ports:
+      - ${PORT}:${PORT}
+      - 9239:9229
+    networks:
+      - webnet
+    depends_on:
+      - redis
+
+  client:
+    container_name: marvelog-client
+    build:
+      context: ../marvelog-client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ../marvelog-client:/usr/app
+      - /usr/app/node_modules
+    env_file: .env.dev
+    ports:
+      - 4800:4800
+    networks:
+      - webnet
+    depends_on:
+      - server
+    entrypoint: npm run start:docker
+
+  redis:
+    container_name: redis-dev
+    image: redis:6-alpine
+    ports:
+      - 6379:6379
+    networks:
+      - webnet
+
+networks:
+  webnet:

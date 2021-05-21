@@ -1,0 +1,17 @@
+import * as Knex from 'knex';
+
+const tableName = '';
+
+export async function up(knex: Knex) {
+  if (!knex.schema.hasTable(tableName)) {
+    knex.schema.createTable(tableName, (t) => {
+      t.increments();
+    });
+  }
+}
+
+export async function down(knex: Knex) {
+  if (knex.schema.hasTable(tableName)) {
+    knex.schema.dropTable(tableName);
+  }
+}
