@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"name": "marvelog-server",
+			"path": "marvelog-server"
+		},
+		{
+			"name": "marvelog-client",
+			"path": "marvelog-client"
+		}
+	],
+	"settings": {
+		"prettier.documentSelectors": [
+			"**/*.{js,ts}"
+		],
+		"files.exclude": {
+			"**/node_modules": true
+		},
+		"conventionalCommits.scopes": [
+			"client",
+			"server"
+		]
+	}
+}
