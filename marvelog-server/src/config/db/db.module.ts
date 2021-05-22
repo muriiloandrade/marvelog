@@ -1,5 +1,5 @@
 import { Module, Global } from '@nestjs/common';
-import * as Knex from 'knex';
+import Knex from 'knex';
 import { Model } from 'objection';
 import { EnvService } from '@config/env/env.service';
 import { EnvModule } from '@config/env/env.module';

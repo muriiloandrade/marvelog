@@ -2,8 +2,8 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { json, urlencoded } from 'express';
-import * as compression from 'compression';
-import * as helmet from 'helmet';
+import compression from 'compression';
+import helmet from 'helmet';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 
