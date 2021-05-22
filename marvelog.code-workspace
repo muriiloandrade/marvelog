@@ -19,6 +19,7 @@
 		"conventionalCommits.scopes": [
 			"client",
 			"server"
-		]
+		],
+		"javascript.preferences.importModuleSpecifier": "relative"
 	}
 }
