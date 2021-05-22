@@ -48,7 +48,6 @@ services:
     container_name: mariadb-dev
     image: mariadb:10.5.3-focal
     env_file: .env.dev
-    restart: always
     networks:
       - webnet
     environment:
