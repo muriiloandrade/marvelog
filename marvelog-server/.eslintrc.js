@@ -34,11 +34,10 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'import/prefer-default-export': 'off',
-    'lines-between-class-members': [
-      'error',
-      'always',
-      { exceptAfterSingleLine: true },
-    ],
+    'lines-between-class-members': 'off',
+    "@typescript-eslint/lines-between-class-members": ["error", "always", {
+      "exceptAfterSingleLine": true
+    }],
     "import/extensions": [
       0, // Off
       {
