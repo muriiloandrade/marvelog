@@ -40,6 +40,23 @@ export class UserController {
     return user.$omit('str_password_usr');
   }
 
+  @Patch('pass')
+  async updatePass(@User() user: JwtDTO, @Body() data: UpdatePassDTO) {
+    const dbUser = await this.service.getById(user.sub);
+
+    if (!(await dbUser.comparePassword(data.oldpassword))) {
+      throw new BadRequestException('Não foi possível alterar a senha!');
+    }
+
+    const upd = await this.service.updatePass(user.sub, data);
+
+    if (upd === 0) {
+      throw new ServiceUnavailableException(
+        'Não foi possível alterar a senha!',
+      );
+    }
+  }
+
   @Patch(':id')
   async update(@User() user: JwtDTO, @Body() data: UpdateUserDTO) {
     const upd = await this.service.update(user.sub, data);
@@ -49,15 +66,6 @@ export class UserController {
         'Não foi possível editar o usuário!',
       );
     }
-  }
-
-  @Patch('pass')
-  async updatePass(@User() user: JwtDTO, @Body() data: UpdatePassDTO) {
-    const dbUser = await this.service.getById(user.sub);
-    if (!(await dbUser.comparePassword(data.oldpassword))) {
-      throw new BadRequestException('Não foi possível alterar a senha!');
-    }
-    await this.service.updatePass(user.sub, data);
   }
 
   @Delete(':id')
