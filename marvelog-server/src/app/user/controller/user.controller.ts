@@ -51,8 +51,7 @@ export class UserController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Patch('/pass')
+  @Patch('pass')
   async updatePass(@User() user: JwtDTO, @Body() data: UpdatePassDTO) {
     const dbUser = await this.service.getById(user.sub);
     if (!(await dbUser.comparePassword(data.oldpassword))) {
