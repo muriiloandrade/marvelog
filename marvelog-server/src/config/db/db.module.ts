@@ -3,8 +3,9 @@ import Knex from 'knex';
 import { Model } from 'objection';
 import { EnvService } from '@config/env/env.service';
 import { EnvModule } from '@config/env/env.module';
+import { UserModel } from '@app/user/models/user.model';
 
-const models = [];
+const models = [UserModel];
 
 const modelProviders = models.map((model) => ({
   provide: model.name,
