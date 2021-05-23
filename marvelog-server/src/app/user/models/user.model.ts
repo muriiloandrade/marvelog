@@ -11,16 +11,9 @@ export class UserModel extends Model {
   str_password_usr: string;
   num_telephone_usr: string;
   dat_created_usr: Date;
-  dat_deactivated_usr: Date;
-  bit_active_usr: boolean;
 
   static get idColumn(): string {
     return 'cod_user_usr';
-  }
-
-  async $afterFind(ctx: QueryContext): Promise<void> {
-    await super.$afterGet(ctx);
-    this.bit_active_usr = !!this.bit_active_usr[0];
   }
 
   async $beforeInsert(ctx: QueryContext): Promise<void> {
