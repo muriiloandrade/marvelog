@@ -35,4 +35,8 @@ export class UserService {
       })
       .first();
   }
+
+  async delete(cod_user_usr: string) {
+    return this.modelClass.query().delete().where({ cod_user_usr });
+  }
 }
