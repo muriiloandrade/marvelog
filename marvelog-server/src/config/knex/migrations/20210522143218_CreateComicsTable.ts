@@ -1,4 +1,4 @@
-import * as Knex from 'knex';
+import Knex from 'knex';
 
 const tableName = 'comic';
 
@@ -12,11 +12,11 @@ export async function up(knex: Knex) {
     t.string('str_title_com', 100).notNullable().comment("Comic's title");
     t.integer('num_issuenumber_com').nullable().comment("Comic's issue number");
 
-    t.string('str_thumbnail_com')
+    t.string('str_thumbnail_com', 300)
       .nullable()
       .comment("URL for the comic's thumbnail");
 
-    t.string('str_details_com')
+    t.string('str_details_com', 1000)
       .notNullable()
       .comment('Details about the comic');
 
