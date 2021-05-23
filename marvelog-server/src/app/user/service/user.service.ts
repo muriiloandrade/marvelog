@@ -6,8 +6,8 @@ import { UserModel } from '@app/user/models/user.model';
 export class UserService {
   constructor(@Inject('UserModel') private modelClass: ModelClass<UserModel>) {}
 
-  async getById(cod_user_str: string) {
-    return this.modelClass.query().where({ cod_user_str }).limit(1).first();
+  async getById(cod_user_usr: string) {
+    return this.modelClass.query().where({ cod_user_usr }).limit(1).first();
   }
 
   async getByLoginUsed(loginField: string) {
