@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ModelClass } from 'objection';
 import { UserModel } from '@app/user/models/user.model';
+import { RegisterDTO } from '@app/auth/models/register.dto';
 
 @Injectable()
 export class UserService {
@@ -22,15 +23,15 @@ export class UserService {
       .first();
   }
 
-  async create(data: Partial<UserModel>) {
+  async create(data: RegisterDTO) {
     return this.modelClass
       .query()
       .insert({
-        num_telephone_usr: data.num_telephone_usr.replace(/\D/g, ''),
-        str_user_usr: data.str_user_usr,
-        str_email_usr: data.str_email_usr,
-        str_name_usr: data.str_name_usr,
-        str_password_usr: data.str_password_usr,
+        num_telephone_usr: data.telephone.replace(/\D/g, ''),
+        str_user_usr: data.username,
+        str_email_usr: data.email,
+        str_name_usr: data.name,
+        str_password_usr: data.password,
       })
       .first();
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '@app/user/service/user.service';
 import { JwtDTO } from '@shared/interfaces/jwt.dto';
-import { UserModel } from '@app/user/models/user.model';
+import { RegisterDTO } from '@app/auth/models/register.dto';
 
 @Injectable()
 export class AuthService {
@@ -38,7 +38,7 @@ export class AuthService {
     };
   }
 
-  async register(cred: Partial<UserModel>) {
+  async register(cred: RegisterDTO) {
     return this.userService.create(cred);
   }
 }
