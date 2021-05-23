@@ -25,7 +25,7 @@ export class FavoriteCharacterModel extends Model {
       modelClass: UserModel,
       relation: Model.BelongsToOneRelation,
       join: {
-        from: 'favoriteComic.cod_user_usr',
+        from: 'favoriteCharacter.cod_user_usr',
         to: 'user.cod_user_usr',
       },
     },
