@@ -3,6 +3,7 @@ import { ModelClass } from 'objection';
 import { UserModel } from '@app/user/models/user.model';
 import { RegisterDTO } from '@app/auth/models/register.dto';
 import { UpdateUserDTO } from '@app/user/models/update-user.dto';
+import { UpdatePassDTO } from '@app/user/models/update-pass.dto';
 
 @Injectable()
 export class UserService {
@@ -49,5 +50,13 @@ export class UserService {
         str_name_usr: data.name,
       })
       .where({ cod_user_usr });
+  }
+
+  async updatePass(cod_user_usr: string, data: UpdatePassDTO) {
+    return this.modelClass
+      .query()
+      .patch({ str_password_usr: data.password })
+      .where({ cod_user_usr })
+      .first();
   }
 }

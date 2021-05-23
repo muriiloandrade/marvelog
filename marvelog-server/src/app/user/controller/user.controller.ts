@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -19,6 +20,7 @@ import { JwtDTO } from '@shared/interfaces/jwt.dto';
 import { GeneralErrorsFilter } from '@shared/filters/error-handling.filter';
 import { HttpExceptionFilter } from '@shared/filters/http-exception.filter';
 import { UpdateUserDTO } from '@app/user/models/update-user.dto';
+import { UpdatePassDTO } from '@app/user/models/update-pass.dto';
 
 @UsePipes(new ValidationPipe({ transform: true, forbidUnknownValues: true }))
 @UseFilters(GeneralErrorsFilter, HttpExceptionFilter)
@@ -47,6 +49,16 @@ export class UserController {
         'Não foi possível editar o usuário!',
       );
     }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('/pass')
+  async updatePass(@User() user: JwtDTO, @Body() data: UpdatePassDTO) {
+    const dbUser = await this.service.getById(user.sub);
+    if (!(await dbUser.comparePassword(data.oldpassword))) {
+      throw new BadRequestException('Não foi possível alterar a senha!');
+    }
+    await this.service.updatePass(user.sub, data);
   }
 
   @Delete(':id')
