@@ -33,8 +33,8 @@ export class UserController {
       throw new NotFoundException('Usuário não encontrado!');
     }
 
-    delete user.str_password_usr;
-    return user;
+    return user.$omit('str_password_usr');
+  }
   }
 
   @Delete(':id')
