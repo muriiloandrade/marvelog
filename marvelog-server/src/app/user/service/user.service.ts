@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ModelClass } from 'objection';
 import { UserModel } from '@app/user/models/user.model';
 import { RegisterDTO } from '@app/auth/models/register.dto';
+import { UpdateUserDTO } from '@app/user/models/update-user.dto';
 
 @Injectable()
 export class UserService {
@@ -38,5 +39,15 @@ export class UserService {
 
   async delete(cod_user_usr: string) {
     return this.modelClass.query().delete().where({ cod_user_usr });
+  }
+
+  async update(cod_user_usr: string, data: UpdateUserDTO) {
+    return this.modelClass
+      .query()
+      .patch({
+        num_telephone_usr: data.telephone.replace(/\D/g, ''),
+        str_name_usr: data.name,
+      })
+      .where({ cod_user_usr });
   }
 }

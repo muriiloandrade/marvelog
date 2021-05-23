@@ -1,10 +1,11 @@
 import {
-  BadRequestException,
+  Body,
   Controller,
   Delete,
   Get,
   NotFoundException,
   Param,
+  Patch,
   ServiceUnavailableException,
   UseFilters,
   UseGuards,
@@ -17,6 +18,7 @@ import { User } from '@shared/decorators/usuario.decorator';
 import { JwtDTO } from '@shared/interfaces/jwt.dto';
 import { GeneralErrorsFilter } from '@shared/filters/error-handling.filter';
 import { HttpExceptionFilter } from '@shared/filters/http-exception.filter';
+import { UpdateUserDTO } from '@app/user/models/update-user.dto';
 
 @UsePipes(new ValidationPipe({ transform: true, forbidUnknownValues: true }))
 @UseFilters(GeneralErrorsFilter, HttpExceptionFilter)
@@ -35,10 +37,20 @@ export class UserController {
 
     return user.$omit('str_password_usr');
   }
+
+  @Patch(':id')
+  async update(@User() user: JwtDTO, @Body() data: UpdateUserDTO) {
+    const upd = await this.service.update(user.sub, data);
+
+    if (upd === 0) {
+      throw new ServiceUnavailableException(
+        'Não foi possível editar o usuário!',
+      );
+    }
   }
 
   @Delete(':id')
-  async delete(@User() user: JwtDTO): Promise<void> {
+  async delete(@User() user: JwtDTO) {
     const deleted = await this.service.delete(user.sub);
     if (deleted === 0) {
       throw new ServiceUnavailableException(
