@@ -1,5 +1,6 @@
-import { Model, QueryContext, ModelOptions } from 'objection';
+import { Model, QueryContext, ModelOptions, RelationMappings } from 'objection';
 import bcrypt from 'bcryptjs';
+import { FavoriteComicModel } from '@shared/models/favoriteComic.model';
 
 export class UserModel extends Model {
   static tableName = 'user';
@@ -37,5 +38,14 @@ export class UserModel extends Model {
     return bcrypt.compare(attempt, this.str_password_usr);
   }
 
-  static relationMappings = {};
+  static relationMappings = (): RelationMappings => ({
+    favoriteComic: {
+      modelClass: FavoriteComicModel,
+      relation: Model.HasManyRelation,
+      join: {
+        from: 'user.cod_user_usr',
+        to: 'favoriteComic.cod_user_usr',
+      },
+    },
+  });
 }

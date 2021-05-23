@@ -4,8 +4,10 @@ import { Model } from 'objection';
 import { EnvService } from '@config/env/env.service';
 import { EnvModule } from '@config/env/env.module';
 import { UserModel } from '@app/user/models/user.model';
+import { ComicModel } from '@app/comic/models/comic.model';
+import { FavoriteComicModel } from '@shared/models/favoriteComic.model';
 
-const models = [UserModel];
+const models = [UserModel, ComicModel, FavoriteComicModel];
 
 const modelProviders = models.map((model) => ({
   provide: model.name,

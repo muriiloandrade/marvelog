@@ -1,4 +1,5 @@
-import { Model } from 'objection';
+import { Model, RelationMappings } from 'objection';
+import { FavoriteComicModel } from '@shared/models/favoriteComic.model';
 
 export class ComicModel extends Model {
   static tableName = 'comic';
@@ -15,5 +16,14 @@ export class ComicModel extends Model {
     return 'cod_marvelid_com';
   }
 
-  static relationMappings = {};
+  static relationMappings = (): RelationMappings => ({
+    favoriteComic: {
+      modelClass: FavoriteComicModel,
+      relation: Model.HasManyRelation,
+      join: {
+        from: 'comic.cod_marvelid_com',
+        to: 'favoriteComic.cod_marvelid_com',
+      },
+    },
+  });
 }
