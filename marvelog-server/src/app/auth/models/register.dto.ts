@@ -2,7 +2,7 @@ import {
   IsString,
   IsPhoneNumber,
   IsEmail,
-  IsAlpha,
+  Matches,
   IsNotEmpty,
   MinLength,
   MaxLength,
@@ -39,8 +39,14 @@ export class RegisterDTO {
   @IsString({
     message: 'Utilize um nome válido',
   })
-  @IsAlpha('pt-BR', {
-    message: 'O campo aceita apenas letras!',
+  @Matches(/[a-zA-Z\s]+/, {
+    message: 'O nome deve conter apenas letras!',
+  })
+  @MinLength(3, {
+    message: 'O nome de usuário deve ter pelo menos 3 caracteres!',
+  })
+  @MaxLength(100, {
+    message: 'O nome deve conter no máximo 100 caracteres!',
   })
   name: string;
 
