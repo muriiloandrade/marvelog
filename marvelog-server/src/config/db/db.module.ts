@@ -6,8 +6,16 @@ import { EnvModule } from '@config/env/env.module';
 import { UserModel } from '@app/user/models/user.model';
 import { ComicModel } from '@app/comic/models/comic.model';
 import { FavoriteComicModel } from '@shared/models/favoriteComic.model';
+import { CharacterModel } from '@app/character/models/character.model';
+import { FavoriteCharacterModel } from '@shared/models/favoriteCharacter.model';
 
-const models = [UserModel, ComicModel, FavoriteComicModel];
+const models = [
+  UserModel,
+  ComicModel,
+  FavoriteComicModel,
+  CharacterModel,
+  FavoriteCharacterModel,
+];
 
 const modelProviders = models.map((model) => ({
   provide: model.name,
