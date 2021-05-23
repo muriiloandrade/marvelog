@@ -54,8 +54,6 @@ export class GeneralErrorsFilter implements ExceptionFilter {
     if (err instanceof UniqueViolationError) {
       res.status(HttpStatus.CONFLICT).send({
         status: HttpStatus.CONFLICT,
-        message:
-          'Não foi possível cadastrar usuário!\n Este e-mail ou nome de usuário já está em uso!',
       });
       json.sqlReturn = (err.nativeError as SQLCustomError).sqlMessage;
     } else if (err instanceof NotNullViolationError) {
