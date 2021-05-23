@@ -10,8 +10,4 @@ COPY . .
 
 RUN ENV=${ENV}
 
-# Para debugar com banco remoto
-# CMD ["npm", "run", "start:remotedebug"]
-
-# Para debugar com um banco local docker
-CMD ["npm", "run", "start:localdebug"]
+RUN apk update && apk add bash

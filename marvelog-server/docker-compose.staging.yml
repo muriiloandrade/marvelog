@@ -6,6 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    command: npm run start:remotedebug'
     volumes:
       - .:/usr/app
       - /usr/app/node_modules

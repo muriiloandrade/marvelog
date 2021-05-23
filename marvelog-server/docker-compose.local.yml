@@ -6,6 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    command: bash -c 'while !</dev/tcp/mariadb/3306; do sleep 1; done; npm run start:localdebug'
     volumes:
       - .:/usr/app
       - /usr/app/node_modules
@@ -57,7 +58,7 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_PASSWORD: ${DB_PASS}
     ports:
-      - ${DB_PORT}:3306
+      - ${OTS_PORT}:${DB_PORT}
     volumes:
       - dbdata:/var/lib/mysql
 
