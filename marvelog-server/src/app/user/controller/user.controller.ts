@@ -38,11 +38,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  async delete(@User() user: JwtDTO, @Param('id') id: string): Promise<void> {
-    if (id !== user.sub) {
-      throw new BadRequestException('Ação inválida!');
-    }
-
+  async delete(@User() user: JwtDTO): Promise<void> {
     const deleted = await this.service.delete(user.sub);
     if (deleted === 0) {
       throw new ServiceUnavailableException(
