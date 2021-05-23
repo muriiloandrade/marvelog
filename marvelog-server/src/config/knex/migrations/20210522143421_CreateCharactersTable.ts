@@ -11,11 +11,11 @@ export async function up(knex: Knex) {
 
     t.string('str_name_cha', 100).notNullable().comment("Character's name");
 
-    t.string('str_thumbnail_cha')
+    t.string('str_thumbnail_cha', 300)
       .nullable()
       .comment("URL for the character's thumbnail");
 
-    t.string('str_details_cha')
+    t.string('str_details_cha', 1000)
       .notNullable()
       .comment('Details about the character');
 
