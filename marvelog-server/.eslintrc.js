@@ -46,7 +46,7 @@ module.exports = {
           ".{js,ts}": "never"
         }
       }
-    ]
-
+    ],
+    "@typescript-eslint/naming-convention": "off"
   },
 };
