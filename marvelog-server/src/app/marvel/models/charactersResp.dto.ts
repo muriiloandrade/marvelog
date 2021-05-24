@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable max-classes-per-file */
+
+import { Type } from 'class-transformer';
+
 export class ComicsItem {
   resourceURI: string;
   name: string;
@@ -19,10 +22,13 @@ export class Thumbnail {
     this.extension = partial.extension;
   }
 }
+
 export class Comics {
   available: string;
   returned: string;
   collectionURI: string;
+
+  @Type(() => ComicsItem)
   items: ComicsItem[];
 
   constructor(partial: Comics) {
@@ -36,11 +42,17 @@ export class Comics {
 }
 
 export class Result {
-  id: string;
+  @Type(() => Number)
+  id: number;
+
   name: string;
   description: string;
   modified: string;
+
+  @Type(() => Thumbnail)
   thumbnail: Thumbnail;
+
+  @Type(() => Comics)
   comics: Comics;
 
   constructor(partial: Result) {
@@ -58,6 +70,7 @@ export class Result {
 }
 
 export class Data {
+  @Type(() => Result)
   results: Result[];
 
   constructor(partial: Data) {
@@ -68,6 +81,8 @@ export class Data {
 
 export class Characters {
   code: number;
+
+  @Type(() => Data)
   data: Data;
 
   constructor(partial: Characters) {
