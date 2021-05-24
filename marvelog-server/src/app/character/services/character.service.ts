@@ -1,7 +1,8 @@
-import { CharacterModel } from '@app/character/models/character.model';
 import { Inject, Injectable } from '@nestjs/common';
-import { FavoriteCharacterModel } from '@shared/models/favoriteCharacter.model';
 import { ModelClass } from 'objection';
+import { CharacterModel } from '@app/character/models/character.model';
+import { CreateCharacterDTO } from '@app/character/models/create-character.dto';
+import { FavoriteCharacterModel } from '@shared/models/favoriteCharacter.model';
 
 @Injectable()
 export class CharacterService {
@@ -16,5 +17,46 @@ export class CharacterService {
       .query()
       .withGraphFetched('character')
       .where({ cod_user_usr });
+  }
+
+  async characterExists(cod_user_usr: string, cod_marvelid_cha: number) {
+    const exists = this.favoriteModelClass
+      .query()
+      .where({ cod_marvelid_cha, cod_user_usr })
+      .then((res) => !!res.length);
+
+    return exists;
+  }
+
+  async createCharacterAndFavorite(
+    character: CreateCharacterDTO,
+    cod_user_usr: string,
+  ) {
+    this.favoriteModelClass.transaction(async (transaction) => {
+      await this.favoriteModelClass.query(transaction).insertGraph({
+        cod_marvelid_cha: character.marvelId,
+        cod_user_usr,
+        character: {
+          cod_marvelid_cha: character.marvelId,
+          str_name_cha: character.name,
+          str_details_cha: character.details,
+          str_thumbnail_cha: character.thumbnail,
+          dat_lastmodified_cha: character.lastModified,
+        },
+      });
+    });
+  }
+
+  async createFavorite(cod_user_usr: string, data: CreateCharacterDTO) {
+    const exists = await this.characterExists(cod_user_usr, data.marvelId);
+
+    if (!exists) {
+      return this.createCharacterAndFavorite(data, cod_user_usr);
+    }
+
+    return this.favoriteModelClass.query().insert({
+      cod_marvelid_cha: data.marvelId,
+      cod_user_usr,
+    });
   }
 }
