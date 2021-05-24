@@ -1,3 +1,4 @@
+import { CharacterDetailsData } from '@app/marvel/models/characterDetailsResp.dto';
 import { Characters } from '@app/marvel/models/charactersResp.dto';
 import { Comics } from '@app/marvel/models/comicsResp.dto';
 import { SearchCharactersParamsDTO } from '@app/marvel/models/searchCharacters.dto';
@@ -7,6 +8,8 @@ import {
   ClassSerializerInterceptor,
   Controller,
   Get,
+  Param,
+  ParseIntPipe,
   Query,
   SerializeOptions,
   UseFilters,
@@ -64,5 +67,16 @@ export class MarvelController {
   async searchComics(@Query() params: SearchComicsParamsDTO) {
     const marvelComics = await this.service.searchComics(params);
     return new Comics(marvelComics);
+  }
+
+  @SerializeOptions({
+    excludePrefixes: ['collectionURI', 'series', 'stories', 'events', 'urls'],
+  })
+  @Get('character/:id')
+  async characterDetails(@Param('id', new ParseIntPipe()) characterId: number) {
+    const characterDetails = await this.service.getCharactersDetails(
+      characterId,
+    );
+    return new CharacterDetailsData(characterDetails);
   }
 }

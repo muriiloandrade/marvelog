@@ -11,6 +11,7 @@ import { SearchCharactersParamsDTO } from '@app/marvel/models/searchCharacters.d
 import { Characters } from '@app/marvel/models/charactersResp.dto';
 import { Comics } from '@app/marvel/models/comicsResp.dto';
 import { SearchComicsParamsDTO } from '@app/marvel/models/searchComics.dto';
+import { CharacterDetails } from '@app/marvel/models/characterDetailsResp.dto';
 
 @Injectable()
 export class MarvelService {
@@ -26,6 +27,26 @@ export class MarvelService {
       })
       .toPromise()
       .then((res) => res.data)
+      .catch((err) => {
+        Logger.error(err);
+        throw new PreconditionFailedException(
+          'Não foi possível consultar a Marvel no momento!',
+        );
+      });
+  }
+
+  async getCharactersDetails(characterId: number) {
+    return this.http
+      .get<CharacterDetails>(
+        `${this.env.marvelApiUrl}/characters/${characterId}`,
+        {
+          params: {
+            ...this.makeRequestParams(),
+          },
+        },
+      )
+      .toPromise()
+      .then((res) => res.data.data)
       .catch((err) => {
         Logger.error(err);
         throw new PreconditionFailedException(
