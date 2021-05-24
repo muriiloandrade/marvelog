@@ -7,14 +7,16 @@ import {
 } from '@nestjs/common';
 import { Md5 } from 'ts-md5';
 import { EnvService } from '@config/env/env.service';
-import { MarvelParamsDTO } from '@app/marvel/models/marvel.dto';
+import { SearchCharactersParamsDTO } from '@app/marvel/models/searchCharacters.dto';
 import { Characters } from '@app/marvel/models/charactersResp.dto';
+import { Comics } from '@app/marvel/models/comicsResp.dto';
+import { SearchComicsParamsDTO } from '@app/marvel/models/searchComics.dto';
 
 @Injectable()
 export class MarvelService {
   constructor(private http: HttpService, private env: EnvService) {}
 
-  async searchCharacters(searchParams: MarvelParamsDTO) {
+  async searchCharacters(searchParams: SearchCharactersParamsDTO) {
     return this.http
       .get<Characters>(`${this.env.marvelApiUrl}/characters`, {
         params: {
@@ -27,7 +29,25 @@ export class MarvelService {
       .catch((err) => {
         Logger.error(err);
         throw new PreconditionFailedException(
-          'Não foi possível consultar o personagem no momento!',
+          'Não foi possível consultar a Marvel no momento!',
+        );
+      });
+  }
+
+  async searchComics(searchParams: SearchComicsParamsDTO) {
+    return this.http
+      .get<Comics>(`${this.env.marvelApiUrl}/comics`, {
+        params: {
+          ...this.makeRequestParams(),
+          ...searchParams,
+        },
+      })
+      .toPromise()
+      .then((res) => res.data)
+      .catch((err) => {
+        Logger.error(err);
+        throw new PreconditionFailedException(
+          'Não foi possível consultar a Marvel no momento!',
         );
       });
   }
