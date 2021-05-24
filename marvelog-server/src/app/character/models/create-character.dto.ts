@@ -28,6 +28,13 @@ export class CreateCharacterDTO {
   })
   thumbnail: string;
 
+  @IsUrl({}, { message: 'O campo resourceUrl não possui uma URL válida!' })
+  @IsString({ message: 'O campo resourceUrl deve ser do tipo string!' })
+  @MaxLength(300, {
+    message: 'A URL da resourceUrl deve conter no máximo 300 caracteres!',
+  })
+  resourceUrl: string;
+
   @IsString({ message: 'O campo details deve ser do tipo string!' })
   @MaxLength(1000, {
     message: 'O campo details deve conter no máximo 1000 caracteres!',

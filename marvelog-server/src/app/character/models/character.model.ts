@@ -8,6 +8,7 @@ export class CharacterModel extends Model {
   str_name_cha: string;
   str_thumbnail_cha: string;
   str_details_cha: string;
+  str_resource_cha: string;
   dat_lastmodified_cha: Date;
   dat_created_cha: Date;
 

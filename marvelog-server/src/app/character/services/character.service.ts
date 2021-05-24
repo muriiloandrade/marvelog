@@ -39,6 +39,7 @@ export class CharacterService {
         character: {
           cod_marvelid_cha: character.marvelId,
           str_name_cha: character.name,
+          str_resource_cha: character.resourceUrl,
           str_details_cha: character.details,
           str_thumbnail_cha: character.thumbnail,
           dat_lastmodified_cha: character.lastModified,
