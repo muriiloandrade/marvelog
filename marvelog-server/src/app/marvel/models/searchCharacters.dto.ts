@@ -1,6 +1,7 @@
 import { IsNumber, IsOptional, IsString, Max } from 'class-validator';
 
-export class MarvelParamsDTO {
+export class SearchCharactersParamsDTO {
+  @IsOptional()
   @IsString({
     message: 'O nome deve ser uma string!',
   })
