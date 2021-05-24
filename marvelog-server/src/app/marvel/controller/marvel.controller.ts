@@ -1,5 +1,6 @@
 import { CharacterDetailsData } from '@app/marvel/models/characterDetailsResp.dto';
 import { Characters } from '@app/marvel/models/charactersResp.dto';
+import { ComicDetailsData } from '@app/marvel/models/comicDetailsResp.dto';
 import { Comics } from '@app/marvel/models/comicsResp.dto';
 import { SearchCharactersParamsDTO } from '@app/marvel/models/searchCharacters.dto';
 import { SearchComicsParamsDTO } from '@app/marvel/models/searchComics.dto';
@@ -78,5 +79,33 @@ export class MarvelController {
       characterId,
     );
     return new CharacterDetailsData(characterDetails);
+  }
+
+  @SerializeOptions({
+    excludePrefixes: [
+      'digitalId',
+      'variantDescription',
+      'isbn',
+      'upc',
+      'diamondCode',
+      'ean',
+      'issn',
+      'format',
+      'textObjects',
+      'urls',
+      'variants',
+      'collect',
+      'dates',
+      'images',
+      'creators',
+      'series',
+      'stories',
+      'events',
+    ],
+  })
+  @Get('comic/:id')
+  async comicDetails(@Param('id', new ParseIntPipe()) comicId: number) {
+    const comicDetails = await this.service.getComicDetails(comicId);
+    return new ComicDetailsData(comicDetails);
   }
 }
