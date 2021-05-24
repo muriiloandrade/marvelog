@@ -15,6 +15,10 @@ export async function up(knex: Knex) {
       .nullable()
       .comment("URL for the character's thumbnail");
 
+    t.string('str_resource_cha', 300)
+      .nullable()
+      .comment("URL for the character's resource");
+
     t.string('str_details_cha', 1000)
       .notNullable()
       .comment('Details about the character');
