@@ -25,16 +25,21 @@ export class AuthService {
   }
 
   async login(user: JwtDTO) {
+    const jwt = this.jwtService.sign(
+      {
+        name: user.name,
+        user: user.user,
+      },
+      {
+        subject: user.sub,
+      },
+    );
+
+    const { exp } = <JwtDTO>this.jwtService.decode(jwt);
+
     return {
-      access_token: this.jwtService.sign(
-        {
-          name: user.name,
-          user: user.user,
-        },
-        {
-          subject: user.sub,
-        },
-      ),
+      access_token: jwt,
+      expTime: exp,
     };
   }
 
