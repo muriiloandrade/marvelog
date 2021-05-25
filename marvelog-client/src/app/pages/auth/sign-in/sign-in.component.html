@@ -1,1 +1,45 @@
-<p>sign-in works!</p>
+<div class="container-fluid">
+  <main class="form-signin">
+    <form (ngSubmit)="logar()" [formGroup]="loginFormGroup">
+      <img class="mb-4 w-100" src="../assets/logo-font-black.png" alt="Logo" />
+      <h1 class="h3 mb-3 fw-normal text-center">Bem vindo de volta!</h1>
+
+      <div class="form-floating">
+        <input
+          class="form-control login"
+          id="floatingInput"
+          formControlName="login"
+          placeholder="name@example.com"
+          [ngClass]="{
+            'is-invalid':
+              loginFormGroup.get('login')?.errors &&
+              loginFormGroup.get('login')?.touched
+          }"
+        />
+        <label for="floatingInput">Usuário ou E-mail</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+          id="floatingPassword"
+          placeholder="Password"
+          [ngClass]="{
+            'is-invalid':
+              loginFormGroup.get('password')?.errors &&
+              loginFormGroup.get('password')?.touched
+          }"
+        />
+        <label for="floatingPassword">Senha</label>
+      </div>
+      <button
+        class="w-100 btn btn-lg btn-danger"
+        [disabled]="!loginFormGroup.valid"
+        type="submit"
+      >
+        Entrar
+      </button>
+    </form>
+  </main>
+</div>

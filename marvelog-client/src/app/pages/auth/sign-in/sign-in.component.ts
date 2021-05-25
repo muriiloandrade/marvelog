@@ -7,22 +7,25 @@ import Swal from 'sweetalert2';
 
 @Component({
   templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss'],
   providers: [SignInService],
 })
 export class SignInComponent {
-  loginFormGroup: FormGroup = this.fb.group({
-    login: ['', [Validators.required, Validators.minLength(11)]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-  });
+  loginFormGroup: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private service: SignInService,
-  ) {}
+  ) {
+    this.loginFormGroup = this.fb.group({
+      login: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
 
   validationsMessage = {
-    numTelefone: [
+    login: [
       { type: 'required', message: 'Campo obrigatório.' },
       { type: 'minlength', message: 'É necessário ter no mínimo 11 digitos.' },
     ],
@@ -35,9 +38,9 @@ export class SignInComponent {
     ],
   };
 
-  logar(formValue: { numTelefone: string; password: string }): void {
+  logar(): void {
     Swal.showLoading();
-    this.service.login(formValue).subscribe(
+    this.service.login(this.loginFormGroup.value).subscribe(
       () => {
         Swal.close();
         this.router.navigate(['dashboard']);
