@@ -1,9 +1,21 @@
 {
   "name": "marvelog-client",
+  "description": "Client side application that of a Marvel catalog where you can manage your favorite Marvel's comics and characters.",
+  "author": "Murilo Andrade",
   "version": "0.0.0",
+  "license": "MIT",
+  "homepage": "https://github.com/muriiloandrade/marvelog",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muriiloandrade/marvelog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/muriiloandrade/marvelog/issues"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -- --host 0.0.0.0 --port 4800",
+    "start": "ng serve",
+    "start:docker": "ng serve -- --host 0.0.0.0 --port 4800",
     "build": "ng build --prod",
     "lint": "ng lint --fix",
     "lintAll": "eslint \"**/*.{js,ts}\" --fix",
