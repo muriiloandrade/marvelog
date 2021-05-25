@@ -19,7 +19,7 @@ import { JwtStrategy } from '@app/auth/passport-strategies/jwt.strategy';
       useFactory: async (envService: EnvService) => ({
         secret: envService.jwtSecret,
         signOptions: {
-          expiresIn: '30m',
+          expiresIn: envService.jwtExp,
           issuer: 'api.marvelog.muriloandrade.dev',
         },
       }),
