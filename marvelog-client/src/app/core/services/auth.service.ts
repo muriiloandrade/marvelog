@@ -1,32 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginResp } from '@core/interfaces/loginResp.dto';
-import { BehaviorSubject } from 'rxjs';
+import dayjs from 'dayjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private userData: BehaviorSubject<LoginResp>;
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) {
-    this.userData = new BehaviorSubject<LoginResp>(
-      JSON.parse(sessionStorage.getItem('currentUser') ?? ''),
-    );
-  }
+  setSession(authResult: LoginResp) {
+    const expTime = dayjs().add(authResult.expTime, 'seconds');
 
-  public set currentUserValue(value: LoginResp) {
-    this.userData.next(value);
-  }
-
-  public get currentUserValue(): LoginResp {
-    return this.userData.value;
+    localStorage.setItem('currentUser', authResult.access_token);
+    localStorage.setItem('expTime', JSON.stringify(expTime.valueOf()));
   }
 
   logout(): void {
-    // remove user from local storage and set current user to null
-    sessionStorage.removeItem('currentUser');
-    this.userData.next(JSON.parse(sessionStorage.getItem('currentUser') ?? ''));
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('expTime');
     this.router.navigate(['auth/login']);
   }
 }
