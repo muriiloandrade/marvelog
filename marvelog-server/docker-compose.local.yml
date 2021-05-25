@@ -35,7 +35,7 @@ services:
       - webnet
     depends_on:
       - server
-    entrypoint: npm run start
+    entrypoint: npm run start:docker
 
   redis:
     container_name: redis-dev
