@@ -17,7 +17,6 @@ services:
     networks:
       - webnet
     depends_on:
-      - redis
       - mariadb
 
   client:
@@ -36,14 +35,6 @@ services:
     depends_on:
       - server
     entrypoint: npm run start:docker
-
-  redis:
-    container_name: redis-dev
-    image: redis:6.2.3-alpine
-    ports:
-      - 6379:6379
-    networks:
-      - webnet
 
   mariadb:
     container_name: mariadb-dev
