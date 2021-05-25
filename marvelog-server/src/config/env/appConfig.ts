@@ -5,6 +5,7 @@ export default registerAs('app', () => ({
   dbName: process.env.DB_NAME,
   dbHost: process.env.DB_HOST,
   dbPort: process.env.DB_PORT,
+  otsPort: process.env.OTS_PORT,
   dbUser: process.env.DB_USER,
   dbPass: process.env.DB_PASS,
   jwtSecret: process.env.JWT_SECRET,

@@ -21,6 +21,10 @@ export class EnvService {
     return this.configService.get<number>('app.dbPort');
   }
 
+  get otsPort(): number {
+    return this.configService.get<number>('app.otsPort');
+  }
+
   get dbUser(): string {
     return this.configService.get<string>('app.dbUser');
   }
