@@ -6,7 +6,7 @@ import { AuthModule } from 'src/app/pages/auth/auth.module';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
   },
   {
