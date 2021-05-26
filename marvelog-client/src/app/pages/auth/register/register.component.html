@@ -1,0 +1,118 @@
+<div class="container-fluid">
+  <main class="form-signin">
+    <form (ngSubmit)="cadastrar()" [formGroup]="registerFormGroup">
+      <a routerLink="/">
+        <img
+          class="mb-4 w-100"
+          src="../assets/logo-font-black.png"
+          alt="Logo"
+        />
+      </a>
+      <h3 class="h5 mb-3 fw-normal text-center">
+        Bem vindo ao Marvelog!<br />Complete seu cadastro para continuar!
+      </h3>
+
+      <div class="form-floating my-1">
+        <input
+          class="form-control"
+          id="usernameInput"
+          formControlName="username"
+          placeholder="tonystark123"
+          [ngClass]="{
+            'is-invalid':
+              registerFormGroup.get('username')?.errors &&
+              registerFormGroup.get('username')?.touched
+          }"
+        />
+        <label for="usernameInput">Usuário</label>
+      </div>
+      <div class="form-floating my-1">
+        <input
+          class="form-control"
+          id="nameInput"
+          formControlName="name"
+          placeholder="Seu nome"
+          [ngClass]="{
+            'is-invalid':
+              registerFormGroup.get('name')?.errors &&
+              registerFormGroup.get('name')?.touched
+          }"
+        />
+        <label for="nameInput">Nome</label>
+      </div>
+      <div class="form-floating my-1">
+        <input
+          class="form-control"
+          id="emailInput"
+          formControlName="email"
+          placeholder="email@example.com"
+          [ngClass]="{
+            'is-invalid':
+              registerFormGroup.get('email')?.errors &&
+              registerFormGroup.get('email')?.touched
+          }"
+        />
+        <label for="emailInput">E-mail</label>
+      </div>
+      <div class="form-floating my-1">
+        <input
+          class="form-control"
+          id="telephoneInput"
+          formControlName="telephone"
+          [mask]="'(00) 00000-0000'"
+          placeholder="(00) 00000-0000"
+          [ngClass]="{
+            'is-invalid':
+              registerFormGroup.errors?.mismatch &&
+              registerFormGroup.get('telephone')?.errors &&
+              registerFormGroup.get('telephone')?.touched
+          }"
+        />
+        <label for="telephoneInput">Telefone</label>
+      </div>
+      <ng-container formGroupName="passwords">
+        <div class="form-floating my-1">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            id="floatingPassword"
+            placeholder="Password"
+            [ngClass]="{
+              'is-invalid':
+                registerFormGroup.get('passwords.password')?.errors &&
+                registerFormGroup.get('passwords.password')?.touched
+            }"
+          />
+          <label for="floatingPassword">Senha</label>
+        </div>
+        <div class="form-floating my-1">
+          <input
+            type="password"
+            class="form-control"
+            formControlName="confirmPassword"
+            id="confirmPassInput"
+            placeholder="Confirmar Senha"
+            [ngClass]="{
+              'is-invalid':
+                registerFormGroup.get('passwords.confirmPassword')?.errors &&
+                registerFormGroup.get('passwords.confirmPassword')?.touched
+            }"
+          />
+          <label for="confirmPassInput">Confirmar senha</label>
+        </div>
+      </ng-container>
+      <button
+        class="w-100 btn btn-lg btn-danger"
+        [disabled]="!registerFormGroup.valid"
+        type="submit"
+      >
+        Entrar
+      </button>
+    </form>
+    <div class="text-center mt-3 mb-3 text-muted">
+      <p class="mb-0">Já tem sua conta?</p>
+      <a class="text-muted" routerLink="/auth/login">Faça login!</a>
+    </div>
+  </main>
+</div>
