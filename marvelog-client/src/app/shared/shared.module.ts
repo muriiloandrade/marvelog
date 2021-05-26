@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import {
   NgxBootstrapIconsModule, house, book, heart, personCircle,
 } from 'ngx-bootstrap-icons';
-import { SidebarComponent } from './sidebar/sidebar.component';
 
 const icons = {
   house,
@@ -14,10 +13,8 @@ const icons = {
 };
 
 @NgModule({
-  declarations: [
-    SidebarComponent,
-  ],
-  exports: [SidebarComponent],
+  declarations: [],
+  exports: [NgxBootstrapIconsModule],
   imports: [
     CommonModule,
     RouterModule,
