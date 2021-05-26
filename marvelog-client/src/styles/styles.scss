@@ -5,3 +5,8 @@
 html, body {
   height: 100%;
 }
+
+@font-face {
+  font-family: "Bebas";
+  src: local("Bebas"), url('../assets/fonts/Bebas-Regular.ttf') format("sans serif");
+}
