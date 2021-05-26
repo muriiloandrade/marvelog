@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@core/guards/auth.guard';
 import { HomeComponent } from '@pages/home/home.component';
 import { AuthComponent } from 'src/app/pages/auth/auth.component';
 import { AuthModule } from 'src/app/pages/auth/auth.module';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
   },
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
         loadChildren: (): Promise<AuthModule> => import('@pages/auth/auth.module').then((m) => m.AuthModule),
       },
     ],
+  },
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/inside-template/inside-template.module').then((m) => m.InsideTemplateModule),
   },
 ];
 
