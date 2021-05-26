@@ -11,10 +11,9 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const config = app.get<ConfigService>(ConfigService);
 
-  app.setGlobalPrefix('api');
   if (config.get('NODE_ENV') === 'prod') {
     app.enableCors({
-      origin: [],
+      origin: ['www.marvelog.muriloandrade.dev', 'marvelog.muriloandrade.dev'],
     });
   } else {
     app.enableCors({ origin: '*' });
