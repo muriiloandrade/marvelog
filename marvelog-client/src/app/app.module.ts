@@ -10,6 +10,7 @@ import { ErrorInterceptor } from '@core/interceptors/error.interceptor';
 import { JwtInterceptor } from '@core/interceptors/jwt.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeModule } from './pages/home/home.module';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -23,6 +24,7 @@ registerLocaleData(localePt, 'pt-BR');
     AppRoutingModule,
     HttpClientModule,
     AuthModule,
+    HomeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
