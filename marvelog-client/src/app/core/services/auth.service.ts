@@ -13,7 +13,17 @@ export class AuthService {
     const expTime = dayjs().add(authResult.expTime, 'seconds');
 
     localStorage.setItem('currentUser', authResult.access_token);
-    localStorage.setItem('expTime', JSON.stringify(expTime.valueOf()));
+    localStorage.setItem('expTime', expTime.valueOf().toString());
+  }
+
+  isLoggedIn() {
+    const expiration = localStorage.getItem('expTime');
+
+    if (expiration) {
+      return dayjs().isBefore(expiration);
+    }
+
+    return false;
   }
 
   logout(): void {
