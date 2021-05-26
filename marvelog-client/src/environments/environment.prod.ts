@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://localhost:7774/api',
+  baseUrl: 'http://api.marvelog.muriloandrade.dev:7774/api',
 };
