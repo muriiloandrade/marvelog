@@ -16,7 +16,7 @@
   <img alt="Postman" src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=red" />
 </div>
 
-### ✨ [Demo](https://github.com/muriiloandrade/marvelog) (pending)
+### ✨ [Demo](https://marvelog.muriloandrade.dev/)
 
 ## Install
 1. Fulfill a .env.dev file based on .env.example, then
