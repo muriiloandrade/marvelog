@@ -36,7 +36,7 @@ export class AuthService {
       return this.jwtHelper.isTokenExpired(currentUser);
     }
 
-    return false;
+    return true;
   }
 
   logout(): void {
