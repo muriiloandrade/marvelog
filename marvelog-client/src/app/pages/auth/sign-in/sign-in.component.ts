@@ -20,7 +20,7 @@ export class SignInComponent {
   ) {
     this.loginFormGroup = this.fb.group({
       login: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
