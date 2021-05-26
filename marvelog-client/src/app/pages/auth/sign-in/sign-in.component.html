@@ -1,7 +1,13 @@
 <div class="container-fluid">
   <main class="form-signin">
     <form (ngSubmit)="logar()" [formGroup]="loginFormGroup">
-      <img class="mb-4 w-100" src="../assets/logo-font-black.png" alt="Logo" />
+      <a routerLink="/">
+        <img
+          class="mb-4 w-100"
+          src="../assets/logo-font-black.png"
+          alt="Logo"
+        />
+      </a>
       <h1 class="h3 mb-3 fw-normal text-center">Bem vindo de volta!</h1>
 
       <div class="form-floating">
@@ -41,5 +47,9 @@
         Entrar
       </button>
     </form>
+    <div class="text-center mt-3 mb-3 text-muted">
+      <p class="mb-0">Ainda não tem conta?</p>
+      <a class="text-muted" routerLink="/auth/register">Faça a sua agora!</a>
+    </div>
   </main>
 </div>
