@@ -1,0 +1,68 @@
+<div class="pt-4">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+      <div
+        class="col"
+        *ngFor="
+          let character of characters
+            | paginate
+              : {
+                  id: 'server',
+                  itemsPerPage: 10,
+                  currentPage: offset,
+                  totalItems: total
+                }
+        "
+      >
+        <div class="card shadow-sm">
+          <img
+            [src]="
+              character.thumbnail.path + '.' + character.thumbnail.extension
+            "
+            [title]="character.name"
+          />
+
+          <div class="card-body">
+            <h5 class="card-title">{{ character.name }}</h5>
+            <ng-container *ngIf="character.description; else descriptionElse">
+              <p class="card-text" [title]="character.description">
+                {{ character.description.substring(0, 55) + "..." }}
+              </p>
+            </ng-container>
+            <ng-template #descriptionElse>
+              <p class="card-text">
+                Esse personagem ainda não possui uma descrição 😞
+              </p>
+            </ng-template>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-danger">
+                  <i-bs [name]="icons.Heart"></i-bs>
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  <i-bs [name]="icons.Search"></i-bs>
+                  Detalhes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pt-3 text-center">
+      <pagination-controls
+        id="server"
+        (pageChange)="buscar($event)"
+        (pageBoundsCorrection)="buscar($event)"
+        [responsive]="true"
+        [autoHide]="true"
+        previousLabel="Anterior"
+        nextLabel="Próxima"
+        screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page"
+        screenReaderCurrentLabel="Você está em"
+      >
+      </pagination-controls>
+    </div>
+  </div>
+</div>
