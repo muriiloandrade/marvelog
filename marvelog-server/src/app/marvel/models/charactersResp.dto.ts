@@ -49,6 +49,9 @@ export class Result {
   description: string;
   modified: string;
 
+  @Type(() => Boolean)
+  favorite: boolean;
+
   @Type(() => Thumbnail)
   thumbnail: Thumbnail;
 

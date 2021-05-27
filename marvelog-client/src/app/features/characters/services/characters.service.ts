@@ -1,15 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
+import { FavoriteCharacter } from '@features/characters/models/favoriteCharacter.dto';
 import { SearchCharacters, SearchCharactersParamsDTO } from '@features/characters/models/searchCharacters.dto';
 
 @Injectable()
 export class CharactersService {
-  private baseURL = `${environment.baseUrl}/v1/marvel`;
+  private baseURL = `${environment.baseUrl}/v1`;
 
   constructor(private http: HttpClient) {}
 
-  consultar(parameters: SearchCharactersParamsDTO) {
+  search(parameters: SearchCharactersParamsDTO) {
     const start = (parameters.startPage - 1) * parameters.limit;
 
     const params = new HttpParams()
@@ -18,6 +19,14 @@ export class CharactersService {
       .set('limit', parameters.limit)
       .set('offset', start);
 
-    return this.http.get<SearchCharacters>(`${this.baseURL}/characters`, { params });
+    return this.http.get<SearchCharacters>(`${this.baseURL}/marvel/characters`, { params });
+  }
+
+  favorite(data: FavoriteCharacter) {
+    if (data.favorite) {
+      return this.http.delete(`${this.baseURL}/character/favorite/${data.marvelId}`);
+    }
+
+    return this.http.post(`${this.baseURL}/character/favorite`, data);
   }
 }

@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { IconNamesEnum } from 'ngx-bootstrap-icons';
 import { Result, SearchCharactersParamsDTO } from '@features/characters/models/searchCharacters.dto';
 import { CharactersService } from '@features/characters/services/characters.service';
+import { FavoriteCharacter } from '@features/characters/models/favoriteCharacter.dto';
 
 @Component({
   templateUrl: './characters.component.html',
@@ -35,10 +36,15 @@ export class CharactersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.buscar(1);
+    this.paginar(1);
   }
 
-  buscar(page: number) {
+  searchCharacter(search: string) {
+    this.searchFG.get('nameStartsWith')?.setValue(search);
+    this.paginar(1);
+  }
+
+  paginar(page: number) {
     if (this.searchFG.valid) {
       Swal.showLoading();
       const searchParams = {
@@ -48,7 +54,7 @@ export class CharactersComponent implements OnInit {
         orderBy: this.searchFG.get('orderBy')?.value,
       } as SearchCharactersParamsDTO;
 
-      this.service.consultar(searchParams).subscribe(
+      this.service.search(searchParams).subscribe(
         (res) => {
           Swal.close();
 
@@ -61,5 +67,28 @@ export class CharactersComponent implements OnInit {
         },
       );
     }
+  }
+
+  favoritar(id: number) {
+    const characterData = this.characters.find((cha) => cha.id === id);
+    const param: FavoriteCharacter = {
+      details: characterData?.description!!,
+      lastModified: characterData?.modified!!,
+      favorite: characterData?.favorite!!,
+      marvelId: id,
+      name: characterData?.name!!,
+      thumbnail: `${characterData?.thumbnail.path}.${characterData?.thumbnail.extension}`,
+    };
+
+    Swal.showLoading();
+    this.service.favorite(param).subscribe(
+      () => {
+        Swal.close();
+        characterData!!.favorite = !characterData!!.favorite;
+      }, (err: HttpErrorResponse) => {
+        Swal.close();
+        Swal.fire('Algo deu errado!', err.error.message, 'error');
+      },
+    );
   }
 }

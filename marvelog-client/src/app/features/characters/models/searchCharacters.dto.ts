@@ -24,6 +24,7 @@ export interface Result {
   modified: string;
   thumbnail: Thumbnail;
   resourceURI: string;
+  favorite: boolean;
 }
 
 export interface Item {

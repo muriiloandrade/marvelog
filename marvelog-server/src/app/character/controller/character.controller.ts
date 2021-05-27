@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/indent */
 import {
+  BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
+  ParseIntPipe,
   Post,
   UseFilters,
   UseGuards,
@@ -31,5 +36,19 @@ export class CharacterController {
   @Post('favorite')
   async createFavorite(@User() user: JwtDTO, @Body() data: CreateCharacterDTO) {
     return this.service.createFavorite(user.sub, data);
+  }
+
+  @Delete('favorite/:id')
+  async deleteFavorite(
+    @User() user: JwtDTO,
+    @Param('id', new ParseIntPipe()) characterId: number,
+  ) {
+    const exists = await this.service.characterExists(user.sub, characterId);
+
+    if (!exists) {
+      throw new BadRequestException('O personagem não está favoritado!');
+    }
+
+    return this.service.deleteFavorite(user.sub, characterId);
   }
 }

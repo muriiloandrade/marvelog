@@ -39,10 +39,9 @@ export class CharacterService {
         character: {
           cod_marvelid_cha: character.marvelId,
           str_name_cha: character.name,
-          str_resource_cha: character.resourceUrl,
           str_details_cha: character.details,
           str_thumbnail_cha: character.thumbnail,
-          dat_lastmodified_cha: character.lastModified,
+          dat_lastmodified_cha: new Date(character.lastModified),
         },
       });
     });
@@ -57,6 +56,13 @@ export class CharacterService {
 
     return this.favoriteModelClass.query().insert({
       cod_marvelid_cha: data.marvelId,
+      cod_user_usr,
+    });
+  }
+
+  async deleteFavorite(cod_user_usr: string, cod_marvelid_cha: number) {
+    return this.favoriteModelClass.query().delete().where({
+      cod_marvelid_cha,
       cod_user_usr,
     });
   }

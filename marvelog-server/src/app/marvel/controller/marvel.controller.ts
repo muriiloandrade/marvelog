@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable @typescript-eslint/indent */
+import { CharacterService } from '@app/character/services/character.service';
 import { CharacterDetailsData } from '@app/marvel/models/characterDetailsResp.dto';
 import { Characters } from '@app/marvel/models/charactersResp.dto';
 import { ComicDetailsData } from '@app/marvel/models/comicDetailsResp.dto';
@@ -19,9 +22,11 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { User } from '@shared/decorators/usuario.decorator';
 import { GeneralErrorsFilter } from '@shared/filters/error-handling.filter';
 import { HttpExceptionFilter } from '@shared/filters/http-exception.filter';
 import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
+import { JwtDTO } from '@shared/interfaces/jwt.dto';
 
 @UseGuards(JwtAuthGuard)
 @UseFilters(GeneralErrorsFilter, HttpExceptionFilter)
@@ -29,14 +34,30 @@ import { JwtAuthGuard } from '@shared/guards/jwt-auth.guard';
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('v1/marvel')
 export class MarvelController {
-  constructor(private service: MarvelService) {}
+  constructor(
+    private service: MarvelService,
+    private charactersService: CharacterService,
+  ) {}
 
   @SerializeOptions({
     excludePrefixes: ['events', 'series', 'stories', 'urls', 'comics'],
   })
   @Get('characters')
-  async searchCharacters(@Query() params: SearchCharactersParamsDTO) {
+  async searchCharacters(
+    @Query() params: SearchCharactersParamsDTO,
+    @User() user: JwtDTO,
+  ) {
     const marvelCharacters = await this.service.searchCharacters(params);
+    const favorites = await this.charactersService.getFavorites(user.sub);
+    marvelCharacters.data.results.forEach((cha) => {
+      const exists = favorites.findIndex(
+        (fav) => fav.cod_marvelid_cha === cha.id,
+      );
+
+      if (exists !== -1) cha.favorite = true;
+      else cha.favorite = false;
+    });
+
     return new Characters(marvelCharacters);
   }
 
