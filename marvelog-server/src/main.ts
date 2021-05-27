@@ -13,7 +13,10 @@ async function bootstrap() {
 
   if (config.get('NODE_ENV') === 'prod') {
     app.enableCors({
-      origin: ['www.marvelog.muriloandrade.dev', 'marvelog.muriloandrade.dev'],
+      origin: [
+        'https://www.marvelog.muriloandrade.dev',
+        'https://marvelog.muriloandrade.dev',
+      ],
     });
   } else {
     app.enableCors({ origin: '*' });
