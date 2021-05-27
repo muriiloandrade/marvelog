@@ -5,47 +5,40 @@
         <input
           class="form-control"
           id="floatingInput"
-          placeholder="Nome do personagem"
-          #name
+          placeholder="Nome do quadrinho"
+          [(ngModel)]="searchTerm"
         />
         <label for="floatingInput">&nbsp;&nbsp;Buscar...</label>
-      </div>
-      <div class="d-grid col-md-2">
-        <button
-          class="btn btn-lg btn-dark"
-          (click)="searchCharacter(name.value)"
-        >
-          <i-bs class="pe-2" [name]="icons.Search"></i-bs> Buscar
-        </button>
       </div>
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
       <div
         class="col"
         *ngFor="
-          let character of characters
+          let favorite of favorites
+            | characterFilter: searchTerm
             | paginate
               : {
                   id: 'server',
-                  itemsPerPage: 10,
-                  currentPage: offset,
-                  totalItems: total
+                  itemsPerPage: 8,
+                  currentPage: page,
+                  totalItems: totalItems
                 }
         "
       >
         <div class="card shadow-sm">
           <img
-            [src]="
-              character.thumbnail.path + '.' + character.thumbnail.extension
-            "
-            [title]="character.name"
+            [src]="favorite.character.str_thumbnail_cha"
+            [title]="favorite.character.str_name_cha"
           />
 
           <div class="card-body">
-            <h5 class="card-title">{{ character.name }}</h5>
-            <ng-container *ngIf="character.description; else descriptionElse">
-              <p class="card-text" [title]="character.description">
-                {{ character.description.substring(0, 55) + "..." }}
+            <h5 class="card-title">{{ favorite.character.str_name_cha }}</h5>
+            <ng-container
+              *ngIf="favorite.character.str_details_cha; else descriptionElse"
+            >
+              <p class="card-text" [title]="favorite.character.str_details_cha">
+                {{ favorite.character.str_details_cha.substr(0, 65) }}
               </p>
             </ng-container>
             <ng-template #descriptionElse>
@@ -57,16 +50,16 @@
               <div class="btn-group">
                 <button
                   type="button"
-                  (click)="favoritar(character.id)"
+                  (click)="favoritar(favorite.cod_marvelid_cha)"
                   class="btn btn-sm btn-outline-danger"
                 >
                   <i-bs
-                    [name]="character.favorite ? icons.HeartFill : icons.Heart"
+                    [name]="favorite.favorite ? icons.HeartFill : icons.Heart"
                   ></i-bs>
                 </button>
                 <a
                   type="button"
-                  [routerLink]="['/personagem', character.id]"
+                  [routerLink]="['/quadrinhos', favorite.cod_marvelid_cha]"
                   class="btn btn-sm btn-outline-secondary"
                 >
                   <i-bs [name]="icons.Search"></i-bs>
@@ -81,8 +74,8 @@
     <div class="pt-3 text-center">
       <pagination-controls
         id="server"
-        (pageChange)="paginar($event)"
-        (pageBoundsCorrection)="paginar($event)"
+        (pageChange)="page = $event"
+        (pageBoundsCorrection)="page = $event"
         [responsive]="true"
         [autoHide]="true"
         previousLabel="Anterior"

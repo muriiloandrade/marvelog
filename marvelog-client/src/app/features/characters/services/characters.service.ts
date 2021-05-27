@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
-import { FavoriteCharacter } from '@features/characters/models/favoriteCharacter.dto';
+import { FavoriteCharacter, FavoriteCharacters } from '@features/characters/models/favoriteCharacter.dto';
 import { SearchCharacters, SearchCharactersParamsDTO } from '@features/characters/models/searchCharacters.dto';
 
 @Injectable()
@@ -28,5 +28,9 @@ export class CharactersService {
     }
 
     return this.http.post(`${this.baseURL}/character/favorite`, data);
+  }
+
+  searchFavorites() {
+    return this.http.get<FavoriteCharacters[]>(`${this.baseURL}/character/favorites`);
   }
 }

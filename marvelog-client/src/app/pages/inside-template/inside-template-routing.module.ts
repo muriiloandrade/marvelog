@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CharactersDetailsComponent } from '@features/characters/characters-details/characters-details.component';
+import { CharactersFavoritesComponent } from '@features/characters/characters-favorites/characters-favorites.component';
 import { CharactersComponent } from '@features/characters/characters-main/characters.component';
 import { ComicsFavoritesComponent } from '@features/comics/comics-favorites/comics-favorites.component';
 import { ComicsMainComponent } from '@features/comics/comics-main/comics-main.component';
@@ -27,6 +28,13 @@ const routes: Routes = [{
       component: CharactersComponent,
       data: {
         title: 'Página dos Personagens',
+      },
+    },
+    {
+      path: 'personagens-favoritos',
+      component: CharactersFavoritesComponent,
+      data: {
+        title: 'Página dos Personagens Favoritos',
       },
     },
     {
