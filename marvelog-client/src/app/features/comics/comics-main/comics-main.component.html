@@ -1,0 +1,98 @@
+<div class="pt-4">
+  <div class="container">
+    <div class="row mb-3">
+      <div class="form-floating col">
+        <input
+          class="form-control"
+          id="floatingInput"
+          formControlName="nameStartsWith"
+          placeholder="Nome do personagem"
+          #name
+        />
+        <label for="floatingInput">&nbsp;&nbsp;Buscar...</label>
+      </div>
+      <div class="d-grid col-md-2">
+        <button class="btn btn-lg btn-dark" (click)="searchComics(name.value)">
+          <i-bs class="pe-2" [name]="icons.Search"></i-bs> Buscar
+        </button>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+      <div
+        class="col"
+        *ngFor="
+          let character of characters
+            | paginate
+              : {
+                  id: 'server',
+                  itemsPerPage: 10,
+                  currentPage: offset,
+                  totalItems: total
+                }
+        "
+      >
+        <div class="card shadow-sm">
+          <img
+            [src]="
+              character.thumbnail.path + '.' + character.thumbnail.extension
+            "
+            [title]="character.title"
+          />
+
+          <div class="card-body">
+            <h5 class="card-title">{{ character.title }}</h5>
+            <ng-container *ngIf="character.description; else descriptionElse">
+              <p
+                class="card-text text-truncate"
+                [title]="character.description"
+              >
+                {{ character.description }}
+              </p>
+            </ng-container>
+            <ng-template #descriptionElse>
+              <p class="card-text">
+                Esse personagem ainda não possui uma descrição 😞
+              </p>
+            </ng-template>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button
+                  type="button"
+                  (click)="favoritar(character.id)"
+                  class="btn btn-sm btn-outline-danger"
+                >
+                  <i-bs
+                    [name]="character.favorite ? icons.HeartFill : icons.Heart"
+                  ></i-bs>
+                </button>
+                <a
+                  type="button"
+                  [routerLink]="['/personagem', character.id]"
+                  class="btn btn-sm btn-outline-secondary"
+                >
+                  <i-bs [name]="icons.Search"></i-bs>
+                  Detalhes
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pt-3 text-center">
+      <pagination-controls
+        id="server"
+        (pageChange)="paginar($event)"
+        (pageBoundsCorrection)="paginar($event)"
+        [responsive]="true"
+        [autoHide]="true"
+        previousLabel="Anterior"
+        nextLabel="Próxima"
+        screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page"
+        screenReaderCurrentLabel="Você está em"
+      >
+      </pagination-controls>
+    </div>
+  </div>
+</div>

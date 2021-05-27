@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '@shared/shared.module';
 import { CharactersModule } from '@features/characters/characters.module';
+import { ComicsModule } from '@features/comics/comics.module';
 import { InsideTemplateRoutingModule } from './inside-template-routing.module';
 import { InsideTemplateComponent } from './inside-template.component';
 
@@ -17,6 +18,7 @@ import { InsideTemplateComponent } from './inside-template.component';
     InsideTemplateRoutingModule,
     SharedModule,
     CharactersModule,
+    ComicsModule,
   ],
 })
 export class InsideTemplateModule { }
