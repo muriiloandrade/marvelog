@@ -39,21 +39,21 @@ export class ComicsFavoritesComponent implements OnInit {
   }
 
   favoritar(id: number) {
-    const characterData = this.favorites.find((cha) => cha.comic.cod_marvelid_com === id);
+    const comicData = this.favorites.find((cha) => cha.comic.cod_marvelid_com === id);
     const param: FavoriteComic = {
-      details: characterData?.comic.str_details_com!!,
-      issueNumber: characterData?.comic.num_issuenumber_com!!,
-      lastModified: characterData?.comic.dat_lastmodified_com!!,
-      favorite: characterData?.favorite!!,
+      details: comicData?.comic.str_details_com!!,
+      issueNumber: comicData?.comic.num_issuenumber_com!!,
+      lastModified: comicData?.comic.dat_lastmodified_com!!,
+      favorite: comicData?.favorite!!,
       marvelId: id,
-      title: characterData?.comic.str_title_com!!,
-      thumbnail: `${characterData?.comic.str_thumbnail_com}`,
+      title: comicData?.comic.str_title_com!!,
+      thumbnail: `${comicData?.comic.str_thumbnail_com}`,
     };
     Swal.showLoading();
     this.service.favorite(param).subscribe(
       () => {
         Swal.close();
-        characterData!!.favorite = !characterData!!.favorite;
+        comicData!!.favorite = !comicData!!.favorite;
       }, (err: HttpErrorResponse) => {
         Swal.close();
         Swal.fire('Algo deu errado!', err.error.message, 'error');
