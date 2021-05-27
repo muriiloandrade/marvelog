@@ -6,41 +6,42 @@
           class="form-control"
           id="floatingInput"
           placeholder="Nome do quadrinho"
-          #name
+          [(ngModel)]="searchTerm"
         />
         <label for="floatingInput">&nbsp;&nbsp;Buscar...</label>
-      </div>
-      <div class="d-grid col-md-2">
-        <button class="btn btn-lg btn-dark" (click)="searchComics(name.value)">
-          <i-bs class="pe-2" [name]="icons.Search"></i-bs> Buscar
-        </button>
       </div>
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
       <div
         class="col"
         *ngFor="
-          let comic of comics
+          let favorite of favorites
+            | stringFilter: searchTerm
             | paginate
               : {
                   id: 'server',
-                  itemsPerPage: 10,
-                  currentPage: offset,
-                  totalItems: total
+                  itemsPerPage: 8,
+                  currentPage: page,
+                  totalItems: totalItems
                 }
         "
       >
         <div class="card shadow-sm">
           <img
-            [src]="comic.thumbnail.path + '.' + comic.thumbnail.extension"
-            [title]="comic.title"
+            [src]="favorite.comic.str_thumbnail_com"
+            [title]="favorite.comic.str_title_com"
           />
 
           <div class="card-body">
-            <h5 class="card-title">{{ comic.title }}</h5>
-            <ng-container *ngIf="comic.description; else descriptionElse">
-              <p class="card-text text-truncate" [title]="comic.description">
-                {{ comic.description }}
+            <h5 class="card-title">{{ favorite.comic.str_title_com }}</h5>
+            <ng-container
+              *ngIf="favorite.comic.str_details_com; else descriptionElse"
+            >
+              <p
+                class="card-text text-truncate"
+                [title]="favorite.comic.str_details_com"
+              >
+                {{ favorite.comic.str_details_com }}
               </p>
             </ng-container>
             <ng-template #descriptionElse>
@@ -52,16 +53,16 @@
               <div class="btn-group">
                 <button
                   type="button"
-                  (click)="favoritar(comic.id)"
+                  (click)="favoritar(favorite.cod_marvelid_com)"
                   class="btn btn-sm btn-outline-danger"
                 >
                   <i-bs
-                    [name]="comic.favorite ? icons.HeartFill : icons.Heart"
+                    [name]="favorite.favorite ? icons.HeartFill : icons.Heart"
                   ></i-bs>
                 </button>
                 <a
                   type="button"
-                  [routerLink]="['/personagem', comic.id]"
+                  [routerLink]="['/quadrinhos', favorite.cod_marvelid_com]"
                   class="btn btn-sm btn-outline-secondary"
                 >
                   <i-bs [name]="icons.Search"></i-bs>
@@ -76,8 +77,8 @@
     <div class="pt-3 text-center">
       <pagination-controls
         id="server"
-        (pageChange)="paginar($event)"
-        (pageBoundsCorrection)="paginar($event)"
+        (pageChange)="page = $event"
+        (pageBoundsCorrection)="page = $event"
         [responsive]="true"
         [autoHide]="true"
         previousLabel="Anterior"

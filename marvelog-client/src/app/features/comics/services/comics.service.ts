@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
-import { FavoriteComic } from '@features/comics/models/favoriteComic.dto';
+import { FavoriteComic, FavoriteComics } from '@features/comics/models/favoriteComic.dto';
 import { SearchComicsDTO, SearchComicsParamsDTO } from '@features/comics/models/searchComics.dto';
 
 @Injectable()
@@ -20,6 +20,10 @@ export class ComicsService {
       .set('offset', start);
 
     return this.http.get<SearchComicsDTO>(`${this.baseURL}/marvel/comics`, { params });
+  }
+
+  searchFavorites() {
+    return this.http.get<FavoriteComics[]>(`${this.baseURL}/comic/favorites`);
   }
 
   favorite(data: FavoriteComic) {
