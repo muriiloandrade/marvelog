@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsString,
   IsNumber,
@@ -10,6 +11,7 @@ import {
 
 export class CreateComicDTO {
   @IsNotEmpty({ message: 'O campo marvelId é obrigatório!' })
+  @Type(() => Number)
   @IsNumber({}, { message: 'O campo marvelId deve ser do tipo número!' })
   marvelId: number;
 
@@ -22,6 +24,7 @@ export class CreateComicDTO {
 
   @IsOptional()
   @IsNumber({}, { message: 'O campo issueNumber deve ser do tipo número!' })
+  @Type(() => Number)
   issueNumber: number;
 
   @IsOptional()
@@ -32,6 +35,7 @@ export class CreateComicDTO {
   })
   thumbnail: string;
 
+  @IsOptional()
   @IsString({ message: 'O campo details deve ser do tipo string!' })
   @MaxLength(1000, {
     message: 'O campo details deve conter no máximo 1000 caracteres!',
@@ -40,5 +44,6 @@ export class CreateComicDTO {
 
   @IsNotEmpty({ message: 'O campo lastModified é obrigatório!' })
   @IsDate({ message: 'O campo lastModified deve ser do tipo Date!' })
+  @Type(() => Date)
   lastModified: Date;
 }

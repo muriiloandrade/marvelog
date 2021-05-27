@@ -19,12 +19,17 @@ export class Thumbnail {
 }
 
 export class Result {
-  id: string;
+  @Type(() => Number)
+  id: number;
+
   title: string;
   issueNumber: string;
   description: string;
   modified: string;
   resourceURI: string;
+
+  @Type(() => Boolean)
+  favorite: boolean;
 
   @Type(() => Thumbnail)
   thumbnail: Thumbnail;

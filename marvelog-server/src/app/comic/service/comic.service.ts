@@ -36,10 +36,10 @@ export class ComicService {
         comic: {
           cod_marvelid_com: comic.marvelId,
           str_title_com: comic.title,
-          str_details_com: comic.details,
+          str_details_com: comic.details ?? undefined,
           str_thumbnail_com: comic.thumbnail,
           num_issuenumber_com: comic.issueNumber,
-          dat_lastmodified_com: comic.lastModified,
+          dat_lastmodified_com: new Date(comic.lastModified),
         },
       });
     });
@@ -54,6 +54,13 @@ export class ComicService {
 
     return this.favoriteModelClass.query().insert({
       cod_marvelid_com: data.marvelId,
+      cod_user_usr,
+    });
+  }
+
+  async deleteFavorite(cod_user_usr: string, cod_marvelid_com: number) {
+    return this.favoriteModelClass.query().delete().where({
+      cod_marvelid_com,
       cod_user_usr,
     });
   }

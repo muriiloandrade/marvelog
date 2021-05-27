@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/indent */
 import { CharacterService } from '@app/character/services/character.service';
+import { ComicService } from '@app/comic/service/comic.service';
 import { CharacterDetailsData } from '@app/marvel/models/characterDetailsResp.dto';
 import { Characters } from '@app/marvel/models/charactersResp.dto';
 import { ComicDetailsData } from '@app/marvel/models/comicDetailsResp.dto';
@@ -37,6 +38,7 @@ export class MarvelController {
   constructor(
     private service: MarvelService,
     private charactersService: CharacterService,
+    private comicService: ComicService,
   ) {}
 
   @SerializeOptions({
@@ -86,8 +88,21 @@ export class MarvelController {
     ],
   })
   @Get('comics')
-  async searchComics(@Query() params: SearchComicsParamsDTO) {
+  async searchComics(
+    @Query() params: SearchComicsParamsDTO,
+    @User() user: JwtDTO,
+  ) {
     const marvelComics = await this.service.searchComics(params);
+    const favorites = await this.comicService.getFavorites(user.sub);
+
+    marvelComics.data.results.forEach((com) => {
+      const exists = favorites.findIndex(
+        (fav) => fav.cod_marvelid_com === com.id,
+      );
+
+      if (exists !== -1) com.favorite = true;
+      else com.favorite = false;
+    });
     return new Comics(marvelComics);
   }
 
