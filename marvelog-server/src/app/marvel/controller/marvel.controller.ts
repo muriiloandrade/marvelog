@@ -32,7 +32,7 @@ export class MarvelController {
   constructor(private service: MarvelService) {}
 
   @SerializeOptions({
-    excludePrefixes: ['events', 'series', 'stories'],
+    excludePrefixes: ['events', 'series', 'stories', 'urls', 'comics'],
   })
   @Get('characters')
   async searchCharacters(@Query() params: SearchCharactersParamsDTO) {
