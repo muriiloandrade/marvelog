@@ -4,10 +4,12 @@ import { CharactersComponent } from '@features/characters/characters-main/charac
 import { RouterModule } from '@angular/router';
 import { NgxBootstrapIconsModule } from 'ngx-bootstrap-icons';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CharactersDetailsComponent } from './characters-details/characters-details.component';
 
 @NgModule({
   declarations: [
     CharactersComponent,
+    CharactersDetailsComponent,
   ],
   imports: [
     CommonModule,
