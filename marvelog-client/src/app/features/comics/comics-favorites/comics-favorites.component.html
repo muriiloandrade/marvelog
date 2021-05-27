@@ -16,7 +16,7 @@
         class="col"
         *ngFor="
           let favorite of favorites
-            | stringFilter: searchTerm
+            | comicFilter: searchTerm
             | paginate
               : {
                   id: 'server',
