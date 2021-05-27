@@ -6,7 +6,7 @@
           class="form-control"
           id="floatingInput"
           formControlName="nameStartsWith"
-          placeholder="Nome do personagem"
+          placeholder="Nome do quadrinho"
           #name
         />
         <label for="floatingInput">&nbsp;&nbsp;Buscar...</label>
@@ -21,7 +21,7 @@
       <div
         class="col"
         *ngFor="
-          let character of characters
+          let comic of comics
             | paginate
               : {
                   id: 'server',
@@ -33,20 +33,15 @@
       >
         <div class="card shadow-sm">
           <img
-            [src]="
-              character.thumbnail.path + '.' + character.thumbnail.extension
-            "
-            [title]="character.title"
+            [src]="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+            [title]="comic.title"
           />
 
           <div class="card-body">
-            <h5 class="card-title">{{ character.title }}</h5>
-            <ng-container *ngIf="character.description; else descriptionElse">
-              <p
-                class="card-text text-truncate"
-                [title]="character.description"
-              >
-                {{ character.description }}
+            <h5 class="card-title">{{ comic.title }}</h5>
+            <ng-container *ngIf="comic.description; else descriptionElse">
+              <p class="card-text text-truncate" [title]="comic.description">
+                {{ comic.description }}
               </p>
             </ng-container>
             <ng-template #descriptionElse>
@@ -58,16 +53,16 @@
               <div class="btn-group">
                 <button
                   type="button"
-                  (click)="favoritar(character.id)"
+                  (click)="favoritar(comic.id)"
                   class="btn btn-sm btn-outline-danger"
                 >
                   <i-bs
-                    [name]="character.favorite ? icons.HeartFill : icons.Heart"
+                    [name]="comic.favorite ? icons.HeartFill : icons.Heart"
                   ></i-bs>
                 </button>
                 <a
                   type="button"
-                  [routerLink]="['/personagem', character.id]"
+                  [routerLink]="['/personagem', comic.id]"
                   class="btn btn-sm btn-outline-secondary"
                 >
                   <i-bs [name]="icons.Search"></i-bs>

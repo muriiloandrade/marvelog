@@ -17,7 +17,7 @@ export class ComicsMainComponent implements OnInit {
 
   icons = IconNamesEnum;
 
-  characters: Result[] = [];
+  comics: Result[] = [];
 
   offset: number = 0;
 
@@ -60,7 +60,7 @@ export class ComicsMainComponent implements OnInit {
 
           this.total = res.data.total;
           this.offset = page;
-          this.characters = res.data.results;
+          this.comics = res.data.results;
         }, (err: HttpErrorResponse) => {
           Swal.close();
           Swal.fire('Algo deu errado!', err.error.message, 'error');
@@ -70,7 +70,7 @@ export class ComicsMainComponent implements OnInit {
   }
 
   favoritar(id: number) {
-    const characterData = this.characters.find((cha) => cha.id === id);
+    const characterData = this.comics.find((cha) => cha.id === id);
     const param: FavoriteComic = {
       details: characterData?.description!!,
       issueNumber: characterData?.issueNumber!!,
