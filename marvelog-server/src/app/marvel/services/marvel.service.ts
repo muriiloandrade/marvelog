@@ -24,6 +24,10 @@ export class MarvelService {
         params: {
           ...this.makeRequestParams(),
           ...searchParams,
+          nameStartsWith:
+            searchParams.nameStartsWith === ''
+              ? undefined
+              : searchParams.nameStartsWith,
         },
       })
       .toPromise()
@@ -62,6 +66,10 @@ export class MarvelService {
         params: {
           ...this.makeRequestParams(),
           ...searchParams,
+          titleStartsWith:
+            searchParams.titleStartsWith === ''
+              ? undefined
+              : searchParams.titleStartsWith,
         },
       })
       .toPromise()
