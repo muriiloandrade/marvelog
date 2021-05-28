@@ -7,11 +7,6 @@ import { AuthModule } from 'src/app/pages/auth/auth.module';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
     path: 'home',
     component: HomeComponent,
   },
