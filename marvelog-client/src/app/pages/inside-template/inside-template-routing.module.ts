@@ -5,6 +5,7 @@ import { CharactersFavoritesComponent } from '@features/characters/characters-fa
 import { CharactersComponent } from '@features/characters/characters-main/characters.component';
 import { ComicsFavoritesComponent } from '@features/comics/comics-favorites/comics-favorites.component';
 import { ComicsMainComponent } from '@features/comics/comics-main/comics-main.component';
+import { ProfileMainComponent } from '@features/profile/profile-main/profile-main.component';
 import { InsideTemplateComponent } from './inside-template.component';
 
 const routes: Routes = [{
@@ -51,6 +52,13 @@ const routes: Routes = [{
       component: ComicsFavoritesComponent,
       data: {
         title: 'Página dos Quadrinhos Favoritos',
+      },
+    },
+    {
+      path: 'profile',
+      component: ProfileMainComponent,
+      data: {
+        title: 'Página do perfil do usuário',
       },
     },
   ],

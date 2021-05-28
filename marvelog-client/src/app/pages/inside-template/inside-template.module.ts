@@ -7,6 +7,7 @@ import { CharactersModule } from '@features/characters/characters.module';
 import { ComicsModule } from '@features/comics/comics.module';
 import { InsideTemplateRoutingModule } from './inside-template-routing.module';
 import { InsideTemplateComponent } from './inside-template.component';
+import { ProfileModule } from '../../features/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { InsideTemplateComponent } from './inside-template.component';
     SharedModule,
     CharactersModule,
     ComicsModule,
+    ProfileModule,
   ],
 })
 export class InsideTemplateModule { }

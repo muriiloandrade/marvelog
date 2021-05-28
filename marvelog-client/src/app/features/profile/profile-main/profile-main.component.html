@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="row row-cols-1 row-cols-sm-2">
+    <form class="mt-5" (ngSubmit)="updateProfileData()" [formGroup]="profileFG">
+      <h3>Alterar dados do perfil</h3>
+      <div class="form-floating my-1">
+        <input
+          class="form-control"
+          id="nameInput"
+          formControlName="name"
+          placeholder="Seu nome"
+          [ngClass]="{
+            'is-invalid':
+              profileFG.get('name')?.errors && profileFG.get('name')?.touched
+          }"
+        />
+        <label for="nameInput">Nome</label>
+      </div>
+      <div class="form-floating my-1">
+        <input
+          class="form-control"
+          id="emailInput"
+          formControlName="email"
+          placeholder="email@example.com"
+          [ngClass]="{
+            'is-invalid':
+              profileFG.get('email')?.errors && profileFG.get('email')?.touched
+          }"
+        />
+        <label for="emailInput">E-mail</label>
+      </div>
+      <div class="form-floating my-1">
+        <input
+          class="form-control"
+          id="telephoneInput"
+          formControlName="telephone"
+          [mask]="'(00) 00000-0000'"
+          placeholder="(00) 00000-0000"
+          [ngClass]="{
+            'is-invalid':
+              profileFG.errors?.mismatch &&
+              profileFG.get('telephone')?.errors &&
+              profileFG.get('telephone')?.touched
+          }"
+        />
+        <label for="telephoneInput">Telefone</label>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button
+          class="w-50 btn btn-lg btn-danger"
+          [disabled]="!profileFG.valid"
+          type="submit"
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
+    <form
+      class="mt-5"
+      (ngSubmit)="updateProfilePass()"
+      [formGroup]="updatePassFG"
+    >
+      <h3>Alterar senha</h3>
+      <div class="form-floating my-1">
+        <input
+          type="password"
+          class="form-control"
+          formControlName="oldpassword"
+          id="floatingPassword"
+          placeholder="Password"
+          [ngClass]="{
+            'is-invalid':
+              updatePassFG.get('oldpassword')?.errors &&
+              updatePassFG.get('oldpassword')?.touched
+          }"
+        />
+        <label for="floatingPassword">Senha atual</label>
+      </div>
+      <div class="form-floating my-1">
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+          id="floatingPassword"
+          placeholder="Password"
+          [ngClass]="{
+            'is-invalid':
+              updatePassFG.get('password')?.errors &&
+              updatePassFG.get('password')?.touched
+          }"
+        />
+        <label for="floatingPassword">Senha nova</label>
+      </div>
+      <div class="form-floating my-1">
+        <input
+          type="password"
+          class="form-control"
+          formControlName="confirmPassword"
+          id="confirmPassInput"
+          placeholder="Confirmar Senha"
+          [ngClass]="{
+            'is-invalid':
+              updatePassFG.get('confirmPassword')?.errors &&
+              updatePassFG.get('confirmPassword')?.touched
+          }"
+        />
+        <label for="confirmPassInput">Confirmar senha</label>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button
+          class="w-50 btn btn-lg btn-danger"
+          [disabled]="!updatePassFG.valid"
+          type="submit"
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
