@@ -43,7 +43,7 @@ export class SignInComponent {
     this.service.login(this.loginFormGroup.value).subscribe(
       () => {
         Swal.close();
-        this.router.navigate(['']);
+        this.router.navigate(['/quadrinhos']);
       },
       (err: HttpErrorResponse) => {
         Swal.close();
