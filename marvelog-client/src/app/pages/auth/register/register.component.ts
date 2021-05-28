@@ -71,7 +71,7 @@ export class RegisterComponent {
             this.registerFormGroup.reset();
             this.authService.setSession(res);
             Swal.close();
-            this.router.navigate(['']);
+            this.router.navigate(['/quadrinhos']);
           });
         }, (err: HttpErrorResponse) => {
           Swal.fire('Tivemos um problema!', err.error.message, 'error');

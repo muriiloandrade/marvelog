@@ -8,7 +8,7 @@ import {
 import { AuthService } from '@core/services/auth.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
+export class HomeGuard implements CanActivate {
   constructor(private router: Router, private authService: AuthService) {}
 
   canActivate(
@@ -22,11 +22,6 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    if (!tokenExpired) {
-      return true;
-    }
-
-    this.authService.logout();
-    return false;
+    return true;
   }
 }

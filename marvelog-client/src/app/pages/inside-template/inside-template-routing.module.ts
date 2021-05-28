@@ -12,11 +12,6 @@ const routes: Routes = [{
   component: InsideTemplateComponent,
   children: [
     {
-      path: '',
-      redirectTo: 'quadrinhos',
-      pathMatch: 'full',
-    },
-    {
       path: 'personagem/:id',
       component: CharactersDetailsComponent,
       data: {
