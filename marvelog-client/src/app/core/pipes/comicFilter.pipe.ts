@@ -6,7 +6,7 @@ import { FavoriteComics } from '@features/comics/models/favoriteComic.dto';
 })
 
 export class ComicFilterPipe implements PipeTransform {
-  transform(items: FavoriteComics[], searchString: string): any {
+  transform(items: FavoriteComics[], searchString: string) {
     if (searchString) {
       return items.filter((item) => item.comic.str_title_com
         .toLowerCase()
