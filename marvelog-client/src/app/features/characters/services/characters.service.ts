@@ -1,8 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
+import { CharacterDetails } from '@features/characters/models/characterDetails.dto';
 import { FavoriteCharacter, FavoriteCharacters } from '@features/characters/models/favoriteCharacter.dto';
 import { SearchCharacters, SearchCharactersParamsDTO } from '@features/characters/models/searchCharacters.dto';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class CharactersService {
@@ -32,5 +34,11 @@ export class CharactersService {
 
   searchFavorites() {
     return this.http.get<FavoriteCharacters[]>(`${this.baseURL}/character/favorites`);
+  }
+
+  getDetails(marvelId: number) {
+    return this.http.get<CharacterDetails>(`${this.baseURL}/marvel/character/${marvelId}`).pipe(
+      map((res) => res.results[0]),
+    );
   }
 }

@@ -1,1 +1,105 @@
-<p>characters-details works!</p>
+<div
+  class="container mt-4"
+  *ngIf="characterDetails$ | async as characterDetails"
+>
+  <h2>Detalhes do personagem</h2>
+  <div class="row row-cols-1 row-cols-lg-2 g-3 mb-3">
+    <div class="col">
+      <div class="card">
+        <img
+          [src]="
+            characterDetails.thumbnail.path +
+            '.' +
+            characterDetails.thumbnail.extension
+          "
+          [alt]="characterDetails.name"
+          class="card-img-top"
+        />
+        <div class="card-header text-center h3">
+          {{ characterDetails.name }}
+        </div>
+      </div>
+    </div>
+    <div class="col d-flex">
+      <div class="card col-12">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div>
+            <h4>Descrição</h4>
+            <ng-container
+              *ngIf="characterDetails.description; else noDescription"
+            >
+              {{ characterDetails.description }}
+            </ng-container>
+            <ng-template #noDescription>
+              Esse personagem ainda não possui uma descrição 😞
+            </ng-template>
+          </div>
+          <div>
+            <h4 class="mt-2">Alguns quadrinhos que participa</h4>
+            <div class="row mb-3">
+              <div class="col">
+                <div class="row row-cols-1 row-cols-md-2">
+                  <div class="col-12 col-md-6">
+                    <ng-container
+                      *ngFor="
+                        let comic of characterDetails.comics.items.slice(0, 9)
+                      "
+                    >
+                      <a
+                        [routerLink]="[
+                          '/quadrinho',
+                          comic.resourceURI.match(regexForNumber)!![0]
+                        ]"
+                        [title]="comic.name"
+                        ><ng-container
+                          *ngIf="comic.name.length > 22; else shortName"
+                        >
+                          {{ comic.name.substr(0, 22) + "..." }}
+                        </ng-container>
+                        <ng-template #shortName>
+                          {{ comic.name }}
+                        </ng-template></a
+                      >
+                      <br />
+                    </ng-container>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <ng-container
+                      *ngFor="
+                        let comic of characterDetails.comics.items.slice(10, 19)
+                      "
+                    >
+                      <a
+                        [routerLink]="[
+                          '/quadrinho',
+                          comic.resourceURI.match(regexForNumber)!![0]
+                        ]"
+                        [title]="comic.name"
+                      >
+                        <ng-container
+                          *ngIf="comic.name.length > 22; else shortName"
+                        >
+                          {{ comic.name.substr(0, 22) + "..." }}
+                        </ng-container>
+                        <ng-template #shortName>
+                          {{ comic.name }}
+                        </ng-template>
+                      </a>
+                      <br />
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <h5 class="card-title">
+            Total de quadrinhos do personagem:
+            {{ characterDetails.comics.available }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
