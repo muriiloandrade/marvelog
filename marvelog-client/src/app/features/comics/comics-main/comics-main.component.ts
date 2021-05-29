@@ -23,13 +23,15 @@ export class ComicsMainComponent implements OnInit {
 
   total: number = 0;
 
+  itemsPerPage: number = 8;
+
   constructor(
     private fb: FormBuilder,
     private service: ComicsService,
   ) {
     this.searchFG = this.fb.group({
       offset: [0],
-      limit: [20, [Validators.min(10), Validators.max(100)]],
+      limit: [this.itemsPerPage, [Validators.min(1), Validators.max(100)]],
       titleStartsWith: [''],
       orderBy: ['title', [Validators.pattern(/^(?:-)?title|(?:-)?issueNumber|(?:-)?modified$/)]],
     });
@@ -48,7 +50,7 @@ export class ComicsMainComponent implements OnInit {
     if (this.searchFG.valid) {
       Swal.showLoading();
       const searchParams = {
-        limit: 8,
+        limit: this.itemsPerPage,
         titleStartsWith: this.searchFG.get('titleStartsWith')?.value,
         startPage: page,
         orderBy: this.searchFG.get('orderBy')?.value,

@@ -22,6 +22,8 @@ export class CharactersFavoritesComponent implements OnInit {
 
   totalItems: number = 0;
 
+  itemsPerPage: number = 8;
+
   constructor(private service: CharactersService) { }
 
   ngOnInit(): void {
