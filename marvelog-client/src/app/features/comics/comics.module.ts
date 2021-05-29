@@ -7,12 +7,14 @@ import { ComicFilterPipe } from '@core/pipes/comicFilter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComicsMainComponent } from './comics-main/comics-main.component';
 import { ComicsFavoritesComponent } from './comics-favorites/comics-favorites.component';
+import { ComicsDetailsComponent } from './comics-details/comics-details.component';
 
 @NgModule({
   declarations: [
     ComicsMainComponent,
     ComicsFavoritesComponent,
     ComicFilterPipe,
+    ComicsDetailsComponent,
   ],
   imports: [
     CommonModule,

@@ -1,8 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environment/environment';
+import { ComicDetails } from '@features/comics/models/detailsComic.dto';
 import { FavoriteComic, FavoriteComics } from '@features/comics/models/favoriteComic.dto';
 import { SearchComicsDTO, SearchComicsParamsDTO } from '@features/comics/models/searchComics.dto';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ComicsService {
@@ -32,5 +34,11 @@ export class ComicsService {
     }
 
     return this.http.post(`${this.baseURL}/comic/favorite`, data);
+  }
+
+  getDetails(marvelId: number) {
+    return this.http.get<ComicDetails>(`${this.baseURL}/marvel/comic/${marvelId}`).pipe(
+      map((res) => res.results[0]),
+    );
   }
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CharactersDetailsComponent } from '@features/characters/characters-details/characters-details.component';
 import { CharactersFavoritesComponent } from '@features/characters/characters-favorites/characters-favorites.component';
 import { CharactersComponent } from '@features/characters/characters-main/characters.component';
+import { ComicsDetailsComponent } from '@features/comics/comics-details/comics-details.component';
 import { ComicsFavoritesComponent } from '@features/comics/comics-favorites/comics-favorites.component';
 import { ComicsMainComponent } from '@features/comics/comics-main/comics-main.component';
 import { ProfileMainComponent } from '@features/profile/profile-main/profile-main.component';
@@ -35,7 +36,7 @@ const routes: Routes = [{
     },
     {
       path: 'quadrinho/:id',
-      component: ComicsMainComponent,
+      component: ComicsDetailsComponent,
       data: {
         title: 'Página de Detalhes do Quadrinho',
       },

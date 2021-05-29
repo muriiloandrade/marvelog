@@ -1,0 +1,130 @@
+<div class="container mt-4" *ngIf="comicDetails$ | async as comicDetails">
+  <h2>Detalhes do quadrinho</h2>
+  <div class="row row-cols-1 row-cols-lg-2 g-3 mb-3">
+    <div class="col">
+      <div class="card">
+        <img
+          [src]="
+            comicDetails.thumbnail.path + '.' + comicDetails.thumbnail.extension
+          "
+          [alt]="comicDetails.title"
+          class="card-img-top"
+        />
+        <div class="card-header text-center h3">
+          {{ comicDetails.title }}
+        </div>
+      </div>
+    </div>
+    <div class="col d-flex">
+      <div class="card col-12">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div>
+            <h4>Descrição</h4>
+            <ng-container *ngIf="comicDetails.description; else noDescription">
+              {{ comicDetails.description }}
+            </ng-container>
+            <ng-template #noDescription>
+              Esse quadrinho ainda não possui uma descrição 😞
+            </ng-template>
+          </div>
+          <div>
+            <h4>Edição Nº</h4>
+            <ng-container *ngIf="comicDetails.issueNumber; else noIssueNumber">
+              {{ comicDetails.issueNumber }}
+            </ng-container>
+            <ng-template #noIssueNumber>
+              Esse quadrinho não teve o número da edição informada pela Marvel
+              😞
+            </ng-template>
+          </div>
+          <div>
+            <h4>Quantidade de páginas</h4>
+            <ng-container *ngIf="comicDetails.pageCount; else noPageCount">
+              {{ comicDetails.pageCount }}
+            </ng-container>
+            <ng-template #noPageCount>
+              Esse quadrinho não teve a quantidade de páginas informada pela
+              Marvel 😞
+            </ng-template>
+          </div>
+          <div>
+            <h4 class="mt-2">Alguns personagens que participam:</h4>
+            <div
+              class="row mb-3"
+              *ngIf="comicDetails.characters.returned; else noCharacters"
+            >
+              <div class="col">
+                <div class="row row-cols-1 row-cols-md-2">
+                  <div class="col-12 col-md-6">
+                    <ng-container
+                      *ngFor="
+                        let character of comicDetails.characters.items.slice(
+                          0,
+                          9
+                        )
+                      "
+                    >
+                      <a
+                        [routerLink]="[
+                          '/personagem',
+                          character.resourceURI.match(regexForNumber)!![0]
+                        ]"
+                        [title]="character.name"
+                        ><ng-container
+                          *ngIf="character.name.length > 22; else shortName"
+                        >
+                          {{ character.name.substr(0, 22) + "..." }}
+                        </ng-container>
+                        <ng-template #shortName>
+                          {{ character.name }}
+                        </ng-template></a
+                      >
+                      <br />
+                    </ng-container>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <ng-container
+                      *ngFor="
+                        let character of comicDetails.characters.items.slice(
+                          10,
+                          19
+                        )
+                      "
+                    >
+                      <a
+                        [routerLink]="[
+                          '/quadrinho',
+                          character.resourceURI.match(regexForNumber)!![0]
+                        ]"
+                        [title]="character.name"
+                      >
+                        <ng-container
+                          *ngIf="character.name.length > 22; else shortName"
+                        >
+                          {{ character.name.substr(0, 22) + "..." }}
+                        </ng-container>
+                        <ng-template #shortName>
+                          {{ character.name }}
+                        </ng-template>
+                      </a>
+                      <br />
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #noCharacters>
+              Esse quadrinho não teve personagens informados pela Marvel 😞
+            </ng-template>
+          </div>
+        </div>
+        <div class="card-footer text-center">
+          <h5 class="card-title">
+            Total de personagens nesse quadrinho:
+            {{ comicDetails.characters.available }}
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
