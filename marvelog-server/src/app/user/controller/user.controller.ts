@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -9,6 +10,7 @@ import {
   ServiceUnavailableException,
   UseFilters,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -24,6 +26,7 @@ import { UpdatePassDTO } from '@app/user/models/update-pass.dto';
 @UsePipes(new ValidationPipe({ transform: true, forbidUnknownValues: true }))
 @UseFilters(GeneralErrorsFilter, HttpExceptionFilter)
 @UseGuards(JwtAuthGuard)
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('v1/user')
 export class UserController {
   constructor(private service: UserService) {}
