@@ -65,7 +65,7 @@
           type="password"
           class="form-control"
           formControlName="oldpassword"
-          id="floatingPassword"
+          id="floatingOldPassword"
           placeholder="Password"
           [ngClass]="{
             'is-invalid':
@@ -73,7 +73,7 @@
               updatePassFG.get('oldpassword')?.touched
           }"
         />
-        <label for="floatingPassword">Senha atual</label>
+        <label for="floatingOldPassword">Senha atual</label>
       </div>
       <div class="form-floating my-1">
         <input
