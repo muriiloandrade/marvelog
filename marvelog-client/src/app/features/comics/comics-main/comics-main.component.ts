@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FavoriteComic } from '@features/comics/models/favoriteComic.dto';
 import { Result, SearchComicsParamsDTO } from '@features/comics/models/searchComics.dto';
@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
   templateUrl: './comics-main.component.html',
   styleUrls: ['./comics-main.component.scss'],
   providers: [ComicsService],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ComicsMainComponent implements OnInit {
   searchFG: FormGroup;

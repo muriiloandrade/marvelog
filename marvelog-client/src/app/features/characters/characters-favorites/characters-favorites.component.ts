@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FavoriteCharacter, FavoriteCharacters } from '@features/characters/models/favoriteCharacter.dto';
 import { CharactersService } from '@features/characters/services/characters.service';
 import { IconNamesEnum } from 'ngx-bootstrap-icons';
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './characters-favorites.component.html',
   styleUrls: ['./characters-favorites.component.scss'],
   providers: [CharactersService],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CharactersFavoritesComponent implements OnInit {
   favorites: FavoriteCharacters[] = [];

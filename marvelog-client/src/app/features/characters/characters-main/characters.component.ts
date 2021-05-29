@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { IconNamesEnum } from 'ngx-bootstrap-icons';
@@ -11,6 +11,7 @@ import { FavoriteCharacter } from '@features/characters/models/favoriteCharacter
   templateUrl: './characters.component.html',
   styleUrls: ['./characters.component.scss'],
   providers: [CharactersService],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CharactersComponent implements OnInit {
   searchFG: FormGroup;

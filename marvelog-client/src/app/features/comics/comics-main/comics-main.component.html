@@ -40,7 +40,7 @@
           <h5 class="card-title">{{ comic.title }}</h5>
           <ng-container *ngIf="comic.description; else descriptionElse">
             <p class="card-text" [title]="comic.description">
-              {{ comic.description.substr(0, 55) }}
+              {{ comic.description.substr(0, 55) + "..." }}
             </p>
           </ng-container>
           <ng-template #descriptionElse>
@@ -76,6 +76,7 @@
   <div class="pt-3 text-center">
     <pagination-controls
       id="server"
+      class="my-pagination"
       (pageChange)="paginar($event)"
       (pageBoundsCorrection)="paginar($event)"
       [responsive]="true"

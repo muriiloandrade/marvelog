@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FavoriteComic, FavoriteComics } from '@features/comics/models/favoriteComic.dto';
 import { ComicsService } from '@features/comics/services/comics.service';
 import { IconNamesEnum } from 'ngx-bootstrap-icons';
@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './comics-favorites.component.html',
   styleUrls: ['./comics-favorites.component.scss'],
   providers: [ComicsService],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ComicsFavoritesComponent implements OnInit {
   favorites: FavoriteComics[] = [];
