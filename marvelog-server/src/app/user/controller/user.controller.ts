@@ -33,18 +33,13 @@ export class UserController {
 
   @Get()
   async getLoggedUser(@User() loggedUser: JwtDTO) {
-    const user = await this.service.getById(loggedUser.sub);
+    const user = await this.service.getProfileData(loggedUser.sub);
 
     if (!user) {
       throw new NotFoundException('Usuário não encontrado!');
     }
 
-    return user.$omit([
-      'cod_user_usr',
-      'str_user_usr',
-      'str_password_usr',
-      'dat_created_usr',
-    ]);
+    return user;
   }
 
   @Patch('pass')

@@ -43,10 +43,10 @@ export class ComicController {
     @User() user: JwtDTO,
     @Param('id', new ParseIntPipe()) comicId: number,
   ) {
-    const exists = await this.service.comicExists(user.sub, comicId);
+    const exists = await this.service.comicExists(comicId);
 
     if (!exists) {
-      throw new BadRequestException('O personagem não está favoritado!');
+      throw new BadRequestException('O quadrinho não está favoritado!');
     }
 
     return this.service.deleteFavorite(user.sub, comicId);

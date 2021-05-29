@@ -13,6 +13,15 @@ export class UserService {
     return this.modelClass.query().where({ cod_user_usr }).limit(1).first();
   }
 
+  async getProfileData(cod_user_usr: string) {
+    return this.modelClass
+      .query()
+      .select('num_telephone_usr', 'str_email_usr', 'str_name_usr')
+      .where({ cod_user_usr })
+      .limit(1)
+      .first();
+  }
+
   async getByLoginUsed(loginField: string) {
     return this.modelClass
       .query()

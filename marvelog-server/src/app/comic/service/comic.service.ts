@@ -19,10 +19,10 @@ export class ComicService {
       .where({ cod_user_usr });
   }
 
-  async comicExists(cod_user_usr: string, cod_marvelid_com: number) {
-    const exists = this.favoriteModelClass
+  async comicExists(cod_marvelid_com: number) {
+    const exists = this.modelClass
       .query()
-      .where({ cod_marvelid_com, cod_user_usr })
+      .where({ cod_marvelid_com })
       .then((res) => !!res.length);
 
     return exists;
@@ -46,7 +46,7 @@ export class ComicService {
   }
 
   async createFavorite(cod_user_usr: string, data: CreateComicDTO) {
-    const exists = await this.comicExists(cod_user_usr, data.marvelId);
+    const exists = await this.comicExists(data.marvelId);
 
     if (!exists) {
       return this.createComicAndFavorite(data, cod_user_usr);

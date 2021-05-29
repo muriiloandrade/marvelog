@@ -20,9 +20,9 @@ export class CharacterService {
   }
 
   async characterExists(cod_user_usr: string, cod_marvelid_cha: number) {
-    const exists = this.favoriteModelClass
+    const exists = this.modelClass
       .query()
-      .where({ cod_marvelid_cha, cod_user_usr })
+      .where({ cod_marvelid_cha })
       .then((res) => !!res.length);
 
     return exists;
