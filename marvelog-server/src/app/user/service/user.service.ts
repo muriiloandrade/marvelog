@@ -46,6 +46,7 @@ export class UserService {
     return this.modelClass
       .query()
       .patch({
+        str_email_usr: data.email,
         num_telephone_usr: data.telephone.replace(/\D/g, ''),
         str_name_usr: data.name,
       })

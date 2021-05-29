@@ -5,7 +5,6 @@ import {
   Delete,
   Get,
   NotFoundException,
-  Param,
   Patch,
   ServiceUnavailableException,
   UseFilters,
@@ -29,15 +28,20 @@ import { UpdatePassDTO } from '@app/user/models/update-pass.dto';
 export class UserController {
   constructor(private service: UserService) {}
 
-  @Get(':id')
-  async getUserById(@Param('id') cod_user_usr: string) {
-    const user = await this.service.getById(cod_user_usr);
+  @Get()
+  async getLoggedUser(@User() loggedUser: JwtDTO) {
+    const user = await this.service.getById(loggedUser.sub);
 
     if (!user) {
       throw new NotFoundException('Usuário não encontrado!');
     }
 
-    return user.$omit('str_password_usr');
+    return user.$omit([
+      'cod_user_usr',
+      'str_user_usr',
+      'str_password_usr',
+      'dat_created_usr',
+    ]);
   }
 
   @Patch('pass')
@@ -57,7 +61,7 @@ export class UserController {
     }
   }
 
-  @Patch(':id')
+  @Patch()
   async update(@User() user: JwtDTO, @Body() data: UpdateUserDTO) {
     const upd = await this.service.update(user.sub, data);
 
@@ -68,7 +72,7 @@ export class UserController {
     }
   }
 
-  @Delete(':id')
+  @Delete()
   async delete(@User() user: JwtDTO) {
     const deleted = await this.service.delete(user.sub);
     if (deleted === 0) {
