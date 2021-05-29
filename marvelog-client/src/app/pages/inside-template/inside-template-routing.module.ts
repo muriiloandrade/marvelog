@@ -34,10 +34,10 @@ const routes: Routes = [{
       },
     },
     {
-      path: 'quadrinhos/:id',
+      path: 'quadrinho/:id',
       component: ComicsMainComponent,
       data: {
-        title: 'Página de Detalhos do Quadrinho',
+        title: 'Página de Detalhes do Quadrinho',
       },
     },
     {
