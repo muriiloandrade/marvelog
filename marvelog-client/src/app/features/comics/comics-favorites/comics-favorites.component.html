@@ -11,7 +11,7 @@
         <label for="floatingInput">&nbsp;&nbsp;Buscar...</label>
       </div>
     </div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
       <div
         class="col"
         *ngFor="
@@ -30,6 +30,7 @@
           <img
             [src]="favorite.comic.str_thumbnail_com"
             [title]="favorite.comic.str_title_com"
+            class="img-fluid"
           />
 
           <div class="card-body">
@@ -37,11 +38,8 @@
             <ng-container
               *ngIf="favorite.comic.str_details_com; else descriptionElse"
             >
-              <p
-                class="card-text text-truncate"
-                [title]="favorite.comic.str_details_com"
-              >
-                {{ favorite.comic.str_details_com }}
+              <p class="card-text" [title]="favorite.comic.str_details_com">
+                {{ favorite.comic.str_details_com.substr(0, 65) + "..." }}
               </p>
             </ng-container>
             <ng-template #descriptionElse>
@@ -66,7 +64,7 @@
                   class="btn btn-sm btn-outline-secondary"
                 >
                   <i-bs [name]="icons.Search"></i-bs>
-                  Detalhes
+                  <span class="d-lg-none d-xl-inline">Detalhes</span>
                 </a>
               </div>
             </div>

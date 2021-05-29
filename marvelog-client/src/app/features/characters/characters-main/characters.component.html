@@ -1,97 +1,92 @@
-<div class="pt-4">
-  <div class="container">
-    <div class="row mb-3">
-      <div class="form-floating col">
-        <input
-          class="form-control"
-          id="floatingInput"
-          placeholder="Nome do personagem"
-          #name
-        />
-        <label for="floatingInput">&nbsp;&nbsp;Buscar...</label>
-      </div>
-      <div class="d-grid col-md-2">
-        <button
-          class="btn btn-lg btn-dark"
-          (click)="searchCharacter(name.value)"
-        >
-          <i-bs class="pe-2" [name]="icons.Search"></i-bs> Buscar
-        </button>
-      </div>
+<div class="container pt-4">
+  <div class="row mb-3">
+    <div class="form-floating col-9 col-sm-10">
+      <input
+        class="form-control"
+        id="floatingInput"
+        placeholder="Nome do personagem"
+        #name
+      />
+      <label for="floatingInput">&nbsp;&nbsp;Buscar...</label>
     </div>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
-      <div
-        class="col"
-        *ngFor="
-          let character of characters
-            | paginate
-              : {
-                  id: 'server',
-                  itemsPerPage: itemsPerPage,
-                  currentPage: offset,
-                  totalItems: total
-                }
-        "
-      >
-        <div class="card shadow-sm">
-          <img
-            [src]="
-              character.thumbnail.path + '.' + character.thumbnail.extension
-            "
-            [title]="character.name"
-          />
+    <div class="col-3 col-sm-2 d-flex">
+      <button class="btn btn-dark col" (click)="searchCharacter(name.value)">
+        <i-bs [name]="icons.Search"></i-bs>
+        <span class="d-none d-sm-inline ms-1">Buscar</span>
+      </button>
+    </div>
+  </div>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
+    <div
+      class="col"
+      *ngFor="
+        let character of characters
+          | paginate
+            : {
+                id: 'server',
+                itemsPerPage: itemsPerPage,
+                currentPage: offset,
+                totalItems: total
+              }
+      "
+    >
+      <div class="card shadow-sm">
+        <img
+          [src]="character.thumbnail.path + '.' + character.thumbnail.extension"
+          [title]="character.name"
+          class="img-fluid"
+        />
 
-          <div class="card-body">
-            <h5 class="card-title">{{ character.name }}</h5>
-            <ng-container *ngIf="character.description; else descriptionElse">
-              <p class="card-text" [title]="character.description">
-                {{ character.description.substring(0, 55) + "..." }}
-              </p>
-            </ng-container>
-            <ng-template #descriptionElse>
-              <p class="card-text">
-                Esse personagem ainda não possui uma descrição 😞
-              </p>
-            </ng-template>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <button
-                  type="button"
-                  (click)="favoritar(character.id)"
-                  class="btn btn-sm btn-outline-danger"
-                >
-                  <i-bs
-                    [name]="character.favorite ? icons.HeartFill : icons.Heart"
-                  ></i-bs>
-                </button>
-                <a
-                  type="button"
-                  [routerLink]="['/personagem', character.id]"
-                  class="btn btn-sm btn-outline-secondary"
-                >
-                  <i-bs [name]="icons.Search"></i-bs>
-                  Detalhes
-                </a>
-              </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ character.name }}</h5>
+          <ng-container *ngIf="character.description; else descriptionElse">
+            <p class="card-text" [title]="character.description">
+              {{ character.description.substring(0, 55) + "..." }}
+            </p>
+          </ng-container>
+          <ng-template #descriptionElse>
+            <p class="card-text">
+              Esse personagem ainda não possui uma descrição 😞
+            </p>
+          </ng-template>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button
+                type="button"
+                (click)="favoritar(character.id)"
+                class="btn btn-sm btn-outline-danger"
+              >
+                <i-bs
+                  [name]="character.favorite ? icons.HeartFill : icons.Heart"
+                ></i-bs>
+              </button>
+              <a
+                type="button"
+                [routerLink]="['/personagem', character.id]"
+                class="btn btn-sm btn-outline-secondary"
+              >
+                <i-bs [name]="icons.Search"></i-bs>
+                <span class="d-lg-none d-xl-inline">Detalhes</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="pt-3 text-center">
-      <pagination-controls
-        id="server"
-        (pageChange)="paginar($event)"
-        (pageBoundsCorrection)="paginar($event)"
-        [responsive]="true"
-        [autoHide]="true"
-        previousLabel="Anterior"
-        nextLabel="Próxima"
-        screenReaderPaginationLabel="Pagination"
-        screenReaderPageLabel="page"
-        screenReaderCurrentLabel="Você está em"
-      >
-      </pagination-controls>
-    </div>
+  </div>
+  <div class="pt-3 text-center">
+    <pagination-controls
+      id="server"
+      (pageChange)="paginar($event)"
+      (pageBoundsCorrection)="paginar($event)"
+      [responsive]="true"
+      [autoHide]="true"
+      previousLabel="Anterior"
+      nextLabel="Próxima"
+      screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="Você está em"
+    >
+    </pagination-controls>
   </div>
 </div>
