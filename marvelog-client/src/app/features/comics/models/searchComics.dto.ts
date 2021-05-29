@@ -21,7 +21,7 @@ export interface Result {
   id: number;
   title: string;
   issueNumber: number;
-  description: null;
+  description: string;
   modified: string;
   pageCount: number;
   resourceURI: string;
