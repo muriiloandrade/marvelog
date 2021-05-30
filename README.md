@@ -16,7 +16,17 @@
   <img alt="Postman" src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=red" />
 </div>
 
-### ✨ [Demo](https://marvelog.muriloandrade.dev/)
+<br />
+<div align="center">
+  <h2><a href="https://marvelog.muriloandrade.dev/" target="_blank">✨ Demo link</a></h2>
+</div>
+  
+## Dependencies
+<div align="center">
+  <img alt="Node.js" src="https://badges.aleen42.com/src/node.svg" /> or 
+  <img alt="Docker" src="https://badges.aleen42.com/src/docker.svg" /> and
+  <img alt="Visual Studio Code" src="https://badges.aleen42.com/src/visual_studio_code.svg" /> (or your preferred editor)
+</div>
 
 ## Install
 1. Fulfill a .env.dev file based on .env.example, then
@@ -47,6 +57,13 @@ npm start
 cd marvelog-client && npm
 ```
 
+### Future features and improvements
+- [ ] Search with Enter on the main page of character and comics
+- [ ] Order the search on all pages
+- [ ] Create a "forgot password" page
+- [ ] Check if the last modified date from the returned data from Marvel's API is greater than the one in database and update the database record if so
+
+
 ## Author
 
 👤 **Murilo Andrade**
@@ -72,3 +89,7 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
+
+## License
+
+Licensed under the [MIT license](LICENSE)
