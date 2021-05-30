@@ -6,7 +6,7 @@ import { FavoriteCharacters } from '@features/characters/models/favoriteCharacte
 })
 
 export class CharacterFilterPipe implements PipeTransform {
-  transform(items: FavoriteCharacters[], searchString: string): any {
+  transform(items: FavoriteCharacters[], searchString: string) {
     if (searchString) {
       return items.filter((item) => item.character.str_name_cha
         .toLowerCase()
