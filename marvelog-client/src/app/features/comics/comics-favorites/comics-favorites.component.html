@@ -27,12 +27,13 @@
         "
       >
         <div class="card shadow-sm">
-          <img
-            [src]="favorite.comic.str_thumbnail_com"
-            [title]="favorite.comic.str_title_com"
-            class="img-fluid"
-          />
-
+          <a [routerLink]="['/quadrinho', favorite.cod_marvelid_com]">
+            <img
+              [src]="favorite.comic.str_thumbnail_com"
+              [title]="favorite.comic.str_title_com"
+              class="img-fluid"
+            />
+          </a>
           <div class="card-body">
             <h5 class="card-title">{{ favorite.comic.str_title_com }}</h5>
             <ng-container

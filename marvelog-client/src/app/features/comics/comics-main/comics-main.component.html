@@ -31,10 +31,13 @@
       "
     >
       <div class="card shadow-sm">
-        <img
-          [src]="comic.thumbnail.path + '.' + comic.thumbnail.extension"
-          [title]="comic.title"
-        />
+        <a [routerLink]="['/quadrinho', comic.id]">
+          <img
+            [src]="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+            [title]="comic.title"
+            class="img-fluid"
+          />
+        </a>
 
         <div class="card-body">
           <h5 class="card-title">{{ comic.title }}</h5>

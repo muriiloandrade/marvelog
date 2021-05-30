@@ -31,12 +31,15 @@
       "
     >
       <div class="card shadow-sm">
-        <img
-          [src]="character.thumbnail.path + '.' + character.thumbnail.extension"
-          [title]="character.name"
-          class="img-fluid"
-        />
-
+        <a [routerLink]="['/personagem', character.id]">
+          <img
+            [src]="
+              character.thumbnail.path + '.' + character.thumbnail.extension
+            "
+            [title]="character.name"
+            class="img-fluid"
+          />
+        </a>
         <div class="card-body">
           <h5 class="card-title">{{ character.name }}</h5>
           <ng-container *ngIf="character.description; else descriptionElse">

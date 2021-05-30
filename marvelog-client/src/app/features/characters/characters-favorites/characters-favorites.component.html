@@ -27,10 +27,13 @@
         "
       >
         <div class="card shadow-sm">
-          <img
-            [src]="favorite.character.str_thumbnail_cha"
-            [title]="favorite.character.str_name_cha"
-          />
+          <a [routerLink]="['/personagem', favorite.cod_marvelid_cha]">
+            <img
+              [src]="favorite.character.str_thumbnail_cha"
+              [title]="favorite.character.str_name_cha"
+              class="img-fluid"
+            />
+          </a>
 
           <div class="card-body">
             <h5 class="card-title">{{ favorite.character.str_name_cha }}</h5>
