@@ -1,0 +1,453 @@
+{
+	"info": {
+		"_postman_id": "5648f37e-8745-4569-acff-2d20fe01db40",
+		"name": "Marvelog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"user\",\n  \"password\": \"123123123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"telephone\": \"(71) 99999-9999\",\n  \"username\": \"user\",\n  \"email\": \"user@user.com\",\n  \"name\": \"Usuario Teste\",\n  \"password\": \"123123123\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXN1YXJpbyBUZXN0ZSIsInVzZXIiOiJ1c2VyIiwiaWF0IjoxNjIyMzQ2MjM5LCJleHAiOjE2MjIzNDgwMzksImlzcyI6ImFwaS5tYXJ2ZWxvZy5tdXJpbG9hbmRyYWRlLmRldiIsInN1YiI6IjE2ZjhjNWJjLWMwZjktMTFlYi04NjZmLTAyNDJhYzEyMDAwMiJ9.V_9qiiNp03RhL_0Dd750Bo_hYfTm-Pt6KAiI222vNEo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXN1YXJpbyBUZXN0ZSIsInVzZXIiOiJ1c2VyIiwiaWF0IjoxNjIyMzQ2MjM5LCJleHAiOjE2MjIzNDgwMzksImlzcyI6ImFwaS5tYXJ2ZWxvZy5tdXJpbG9hbmRyYWRlLmRldiIsInN1YiI6IjE2ZjhjNWJjLWMwZjktMTFlYi04NjZmLTAyNDJhYzEyMDAwMiJ9.V_9qiiNp03RhL_0Dd750Bo_hYfTm-Pt6KAiI222vNEo",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Info",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTXVyaWxvIEFuZHJhZGUgZGUgQWxtZWlkYSIsInVzZXIiOiJtdXJpbG9hbmRyYWFhZGUiLCJpYXQiOjE2MjE3ODE1OTEsImV4cCI6MTYyMTc4MzM5MSwiaXNzIjoiYXBpLm1hcnZlbG9nLm11cmlsb2FuZHJhZGUuZGV2Iiwic3ViIjoiYzhkOWIxYzYtYmI5Mi0xMWViLWFmNmUtMDI0MmFjMWIwMDAzIn0.OCqC66VjfUQTiETrTIONL94M-fyRTnZkmlstpKyBPh8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"telephone\": \"(71) 99189-3307\",\n  \"name\": \"Murilo Andrade de Almeida\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/user/c8d9b1c6-bb92-11eb-af6e-0242ac1b0003",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"c8d9b1c6-bb92-11eb-af6e-0242ac1b0003"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pass",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTXVyaWxvIEFuZHJhZGUgZGUgQWxtZWlkYSIsInVzZXIiOiJtdXJpbG9hbmRyYWFhZGUiLCJpYXQiOjE2MjE3ODE1OTEsImV4cCI6MTYyMTc4MzM5MSwiaXNzIjoiYXBpLm1hcnZlbG9nLm11cmlsb2FuZHJhZGUuZGV2Iiwic3ViIjoiYzhkOWIxYzYtYmI5Mi0xMWViLWFmNmUtMDI0MmFjMWIwMDAzIn0.OCqC66VjfUQTiETrTIONL94M-fyRTnZkmlstpKyBPh8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"oldpassword\": \"123123123\",\n  \"password\": \"123123123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/user/pass",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"user",
+								"pass"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comic",
+			"item": [
+				{
+					"name": "GetFavorites",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXN1YXJpbyBUZXN0ZSIsInVzZXIiOiJ1c2VyIiwiaWF0IjoxNjIyMzQ2MzYyLCJleHAiOjE2MjIzNDgxNjIsImlzcyI6ImFwaS5tYXJ2ZWxvZy5tdXJpbG9hbmRyYWRlLmRldiIsInN1YiI6IjhiMmFmNDhmLWMwZjktMTFlYi04NjZmLTAyNDJhYzEyMDAwMiJ9.0sEGyYlQJAyeXPmRCvWQ4jC1UPFIWUjsu8IlIGUY8xM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/comic/favorites",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"comic",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Favorite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXN1YXJpbyBUZXN0ZSIsInVzZXIiOiJ1c2VyIiwiaWF0IjoxNjIyMzQ2MzYyLCJleHAiOjE2MjIzNDgxNjIsImlzcyI6ImFwaS5tYXJ2ZWxvZy5tdXJpbG9hbmRyYWRlLmRldiIsInN1YiI6IjhiMmFmNDhmLWMwZjktMTFlYi04NjZmLTAyNDJhYzEyMDAwMiJ9.0sEGyYlQJAyeXPmRCvWQ4jC1UPFIWUjsu8IlIGUY8xM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"marvelId\": 59551,\n  \"title\": \"Spider-Man (2016) #6 (Anka Mighty Men Variant)\",\n  \"issueNumber\": 6,\n  \"thumbnail\": \"http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg\",\n  \"details\": \"\",\n  \"lastModified\": \"2016-07-21T10:00:00Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/comic/favorite",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"comic",
+								"favorite"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Character",
+			"item": [
+				{
+					"name": "GetFavorites",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXN1YXJpbyBUZXN0ZSIsInVzZXIiOiJ1c2VyIiwiaWF0IjoxNjIyMzQ2MzYyLCJleHAiOjE2MjIzNDgxNjIsImlzcyI6ImFwaS5tYXJ2ZWxvZy5tdXJpbG9hbmRyYWRlLmRldiIsInN1YiI6IjhiMmFmNDhmLWMwZjktMTFlYi04NjZmLTAyNDJhYzEyMDAwMiJ9.0sEGyYlQJAyeXPmRCvWQ4jC1UPFIWUjsu8IlIGUY8xM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/character/favorites",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"character",
+								"favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Favorite Character",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXN1YXJpbyBUZXN0ZSIsInVzZXIiOiJ1c2VyIiwiaWF0IjoxNjIyMzQ2MzYyLCJleHAiOjE2MjIzNDgxNjIsImlzcyI6ImFwaS5tYXJ2ZWxvZy5tdXJpbG9hbmRyYWRlLmRldiIsInN1YiI6IjhiMmFmNDhmLWMwZjktMTFlYi04NjZmLTAyNDJhYzEyMDAwMiJ9.0sEGyYlQJAyeXPmRCvWQ4jC1UPFIWUjsu8IlIGUY8xM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"marvelId\": 1009610,\n  \"name\": \"Spider-Man\",\n  \"thumbnail\": \"http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b.jpg\",\n  \"details\": \"Bitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider. Adopting the name Spider-Man, Peter hoped to start a career using his new abilities. Taught that with great power comes great responsibility, Spidey has vowed to use his powers to help people.\",\n  \"lastModified\": \"2021-12-03T10:00:00Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/character/favorite",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"character",
+								"favorite"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Marvel",
+			"item": [
+				{
+					"name": "Get Characters",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXN1YXJpbyBUZXN0ZSIsInVzZXIiOiJ1c2VyIiwiaWF0IjoxNjIyMzQ2MzYyLCJleHAiOjE2MjIzNDgxNjIsImlzcyI6ImFwaS5tYXJ2ZWxvZy5tdXJpbG9hbmRyYWRlLmRldiIsInN1YiI6IjhiMmFmNDhmLWMwZjktMTFlYi04NjZmLTAyNDJhYzEyMDAwMiJ9.0sEGyYlQJAyeXPmRCvWQ4jC1UPFIWUjsu8IlIGUY8xM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/marvel/characters",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"marvel",
+								"characters"
+							],
+							"query": [
+								{
+									"key": "nameStartsWith",
+									"value": "hu",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comics",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXN1YXJpbyBUZXN0ZSIsInVzZXIiOiJ1c2VyIiwiaWF0IjoxNjIyMzQ2MzYyLCJleHAiOjE2MjIzNDgxNjIsImlzcyI6ImFwaS5tYXJ2ZWxvZy5tdXJpbG9hbmRyYWRlLmRldiIsInN1YiI6IjhiMmFmNDhmLWMwZjktMTFlYi04NjZmLTAyNDJhYzEyMDAwMiJ9.0sEGyYlQJAyeXPmRCvWQ4jC1UPFIWUjsu8IlIGUY8xM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/marvel/comics?titleStartsWith=spider",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"marvel",
+								"comics"
+							],
+							"query": [
+								{
+									"key": "titleStartsWith",
+									"value": "spider"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get CharacterDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXN1YXJpbyBUZXN0ZSIsInVzZXIiOiJ1c2VyIiwiaWF0IjoxNjIyMzQ2MzYyLCJleHAiOjE2MjIzNDgxNjIsImlzcyI6ImFwaS5tYXJ2ZWxvZy5tdXJpbG9hbmRyYWRlLmRldiIsInN1YiI6IjhiMmFmNDhmLWMwZjktMTFlYi04NjZmLTAyNDJhYzEyMDAwMiJ9.0sEGyYlQJAyeXPmRCvWQ4jC1UPFIWUjsu8IlIGUY8xM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/marvel/character/1009610",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"marvel",
+								"character",
+								"1009610"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ComicDetails",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVXN1YXJpbyBUZXN0ZSIsInVzZXIiOiJ1c2VyIiwiaWF0IjoxNjIyMzQ2MzYyLCJleHAiOjE2MjIzNDgxNjIsImlzcyI6ImFwaS5tYXJ2ZWxvZy5tdXJpbG9hbmRyYWRlLmRldiIsInN1YiI6IjhiMmFmNDhmLWMwZjktMTFlYi04NjZmLTAyNDJhYzEyMDAwMiJ9.0sEGyYlQJAyeXPmRCvWQ4jC1UPFIWUjsu8IlIGUY8xM",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/marvel/comic/7207",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"marvel",
+								"comic",
+								"7207"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
