@@ -18,7 +18,7 @@
 
 <br />
 <div align="center">
-  <h2><a href="https://marvelog.muriloandrade.dev/" target="_blank">✨ Demo link</a></h2>
+  <h2><a href="https://marvelog.muriloandrade.dev/" target="_blank">✨ Demo link (backend currently unavailable)</a></h2>
 </div>
   
 ## Dependencies
