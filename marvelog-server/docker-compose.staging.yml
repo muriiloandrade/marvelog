@@ -6,11 +6,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: npm run start:remotedebug'
+    command: npm run start:remotedebug
     volumes:
       - .:/usr/app
       - /usr/app/node_modules
-    env_file: .env.dev
+    env_file: .env.staging
     ports:
       - ${PORT}:${PORT}
       - 9239:9229
@@ -25,7 +25,7 @@ services:
     volumes:
       - ../marvelog-client:/usr/app
       - /usr/app/node_modules
-    env_file: .env.dev
+    env_file: .env.staging
     ports:
       - 4800:4800
     networks:
