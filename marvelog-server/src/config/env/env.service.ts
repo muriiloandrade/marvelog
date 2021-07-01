@@ -17,6 +17,10 @@ export class EnvService {
     return this.configService.get<string>('app.dbHost');
   }
 
+  get dbConStr(): string {
+    return this.configService.get<string>('app.dbConStr');
+  }
+
   get dbPort(): number {
     return this.configService.get<number>('app.dbPort');
   }
