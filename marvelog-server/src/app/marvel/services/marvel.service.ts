@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/indent */
 import {
-  HttpService,
   Injectable,
   Logger,
   PreconditionFailedException,
 } from '@nestjs/common';
+import { HttpService } from '@nestjs/axios';
 import { Md5 } from 'ts-md5';
 import { EnvService } from '@config/env/env.service';
 import { SearchCharactersParamsDTO } from '@app/marvel/models/searchCharacters.dto';
@@ -13,14 +13,16 @@ import { Comics } from '@app/marvel/models/comicsResp.dto';
 import { SearchComicsParamsDTO } from '@app/marvel/models/searchComics.dto';
 import { CharacterDetails } from '@app/marvel/models/characterDetailsResp.dto';
 import { ComicsDetails } from '@app/marvel/models/comicDetailsResp.dto';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class MarvelService {
   constructor(private http: HttpService, private env: EnvService) {}
 
   async searchCharacters(searchParams: SearchCharactersParamsDTO) {
-    return this.http
-      .get<Characters>(`${this.env.marvelApiUrl}/characters`, {
+    const source$ = this.http.get<Characters>(
+      `${this.env.marvelApiUrl}/characters`,
+      {
         params: {
           ...this.makeRequestParams(),
           ...searchParams,
@@ -29,74 +31,83 @@ export class MarvelService {
               ? undefined
               : searchParams.nameStartsWith,
         },
-      })
-      .toPromise()
-      .then((res) => res.data)
-      .catch((err) => {
-        Logger.error(err);
-        throw new PreconditionFailedException(
-          'Não foi possível consultar a Marvel no momento!',
-        );
-      });
+      },
+    );
+
+    try {
+      const res = await lastValueFrom(source$);
+      return res.data;
+    } catch (error) {
+      Logger.error(error);
+      throw new PreconditionFailedException(
+        'Não foi possível consultar a Marvel no momento!',
+      );
+    }
   }
 
   async getCharactersDetails(characterId: number) {
-    return this.http
-      .get<CharacterDetails>(
-        `${this.env.marvelApiUrl}/characters/${characterId}`,
-        {
-          params: {
-            ...this.makeRequestParams(),
-          },
+    const source$ = this.http.get<CharacterDetails>(
+      `${this.env.marvelApiUrl}/characters/${characterId}`,
+      {
+        params: {
+          ...this.makeRequestParams(),
         },
-      )
-      .toPromise()
-      .then((res) => res.data.data)
-      .catch((err) => {
-        Logger.error(err);
-        throw new PreconditionFailedException(
-          'Não foi possível consultar a Marvel no momento!',
-        );
-      });
+      },
+    );
+
+    try {
+      const res = await lastValueFrom(source$);
+      return res.data.data;
+    } catch (error) {
+      Logger.error(error);
+      throw new PreconditionFailedException(
+        'Não foi possível consultar a Marvel no momento!',
+      );
+    }
   }
 
   async searchComics(searchParams: SearchComicsParamsDTO) {
-    return this.http
-      .get<Comics>(`${this.env.marvelApiUrl}/comics`, {
-        params: {
-          ...this.makeRequestParams(),
-          ...searchParams,
-          titleStartsWith:
-            searchParams.titleStartsWith === ''
-              ? undefined
-              : searchParams.titleStartsWith,
-        },
-      })
-      .toPromise()
-      .then((res) => res.data)
-      .catch((err) => {
-        Logger.error(err);
-        throw new PreconditionFailedException(
-          'Não foi possível consultar a Marvel no momento!',
-        );
-      });
+    const source$ = this.http.get<Comics>(`${this.env.marvelApiUrl}/comics`, {
+      params: {
+        ...this.makeRequestParams(),
+        ...searchParams,
+        titleStartsWith:
+          searchParams.titleStartsWith === ''
+            ? undefined
+            : searchParams.titleStartsWith,
+      },
+    });
+
+    try {
+      const res = await lastValueFrom(source$);
+      return res.data;
+    } catch (error) {
+      Logger.error(error);
+      throw new PreconditionFailedException(
+        'Não foi possível consultar a Marvel no momento!',
+      );
+    }
   }
 
   async getComicDetails(comicId: number) {
-    return this.http
-      .get<ComicsDetails>(`${this.env.marvelApiUrl}/comics/${comicId}`, {
+    const source$ = this.http.get<ComicsDetails>(
+      `${this.env.marvelApiUrl}/comics/${comicId}`,
+      {
         params: {
           ...this.makeRequestParams(),
         },
-      })
-      .toPromise()
-      .then((res) => res.data.data)
-      .catch((err) => {
-        Logger.error(err);
-        throw new PreconditionFailedException(
-          'Não foi possível consultar a Marvel no momento!',
-        );
-      });
+      },
+    );
+
+    try {
+      const res = await lastValueFrom(source$);
+      return res.data.data;
+    } catch (error) {
+      Logger.error(error);
+      throw new PreconditionFailedException(
+        'Não foi possível consultar a Marvel no momento!',
+      );
+    }
   }
 
   private makeRequestParams() {

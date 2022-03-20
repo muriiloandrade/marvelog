@@ -1,4 +1,5 @@
-import { HttpModule, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios';
 import { MarvelController } from '@app/marvel/controller/marvel.controller';
 import { MarvelService } from '@app/marvel/services/marvel.service';
 import { CharacterService } from '@app/character/services/character.service';
