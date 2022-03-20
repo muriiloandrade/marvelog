@@ -33,7 +33,14 @@ const modelProviders = models.map((model) => ({
       useFactory: async (config: EnvService) => {
         const knex = Knex({
           client: 'mysql2',
-          connection: config.dbConStr,
+          connection: config.dbConStr || {
+            host: config.dbHost,
+            database: config.dbName,
+            port: config.dbPort,
+            user: config.dbUser,
+            password: config.dbPass,
+            connectTimeout: 60000,
+          },
           debug: config.env !== 'prod',
           pool: { min: 2, max: 10 },
         });
