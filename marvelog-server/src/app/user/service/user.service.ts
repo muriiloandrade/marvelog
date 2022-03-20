@@ -10,7 +10,7 @@ export class UserService {
   constructor(@Inject('UserModel') private modelClass: ModelClass<UserModel>) {}
 
   async getById(cod_user_usr: string) {
-    return this.modelClass.query().where({ cod_user_usr }).limit(1).first();
+    return this.modelClass.query().findById(cod_user_usr);
   }
 
   async getProfileData(cod_user_usr: string) {

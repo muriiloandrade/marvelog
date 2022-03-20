@@ -22,8 +22,8 @@ export class CharacterService {
   async characterExists(cod_marvelid_cha: number) {
     const exists = this.modelClass
       .query()
-      .where({ cod_marvelid_cha })
-      .then((res) => !!res.length);
+      .findById(cod_marvelid_cha)
+      .then((res) => !!res);
 
     return exists;
   }
