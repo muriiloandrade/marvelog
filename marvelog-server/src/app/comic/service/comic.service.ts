@@ -22,8 +22,8 @@ export class ComicService {
   async comicExists(cod_marvelid_com: number) {
     const exists = this.modelClass
       .query()
-      .where({ cod_marvelid_com })
-      .then((res) => !!res.length);
+      .findById(cod_marvelid_com)
+      .then((res) => !!res);
 
     return exists;
   }

@@ -19,11 +19,11 @@ export class CharacterService {
       .where({ cod_user_usr });
   }
 
-  async characterExists(cod_user_usr: string, cod_marvelid_cha: number) {
+  async characterExists(cod_marvelid_cha: number) {
     const exists = this.modelClass
       .query()
-      .where({ cod_marvelid_cha })
-      .then((res) => !!res.length);
+      .findById(cod_marvelid_cha)
+      .then((res) => !!res);
 
     return exists;
   }
@@ -48,7 +48,7 @@ export class CharacterService {
   }
 
   async createFavorite(cod_user_usr: string, data: CreateCharacterDTO) {
-    const exists = await this.characterExists(cod_user_usr, data.marvelId);
+    const exists = await this.characterExists(data.marvelId);
 
     if (!exists) {
       return this.createCharacterAndFavorite(data, cod_user_usr);
