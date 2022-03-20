@@ -43,7 +43,7 @@ export class CharacterController {
     @User() user: JwtDTO,
     @Param('id', new ParseIntPipe()) characterId: number,
   ) {
-    const exists = await this.service.characterExists(user.sub, characterId);
+    const exists = await this.service.characterExists(characterId);
 
     if (!exists) {
       throw new BadRequestException('O personagem não está favoritado!');
