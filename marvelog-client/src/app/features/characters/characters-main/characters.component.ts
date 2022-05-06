@@ -47,6 +47,10 @@ export class CharactersComponent implements OnInit {
     this.paginar(1);
   }
 
+  handleSubmit() {
+    this.paginar(1);
+  }
+
   paginar(page: number) {
     if (this.searchFG.valid) {
       Swal.showLoading();

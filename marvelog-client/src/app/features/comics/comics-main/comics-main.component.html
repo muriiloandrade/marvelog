@@ -1,21 +1,24 @@
 <div class="container pt-4">
-  <div class="row mb-3">
-    <div class="form-floating col-9 col-sm-10">
-      <input
-        class="form-control"
-        id="floatingInput"
-        placeholder="Nome do quadrinho"
-        #name
-      />
-      <label for="floatingInput">&nbsp;&nbsp;Buscar...</label>
+  <form (ngSubmit)="handleSubmit()" [formGroup]="searchFG">
+    <div class="row mb-3">
+      <div class="form-floating col-9 col-sm-10">
+        <input
+          class="form-control"
+          id="floatingInput"
+          placeholder="Nome do quadrinho"
+          formControlName="titleStartsWith"
+          #name
+        />
+        <label for="floatingInput">&nbsp;&nbsp;Buscar...</label>
+      </div>
+      <div class="col-3 col-sm-2 d-flex">
+        <button class="btn btn-dark col" (click)="searchComics(name.value)">
+          <i-bs [name]="icons.Search"></i-bs>
+          <span class="d-none d-sm-inline ms-1">Buscar</span>
+        </button>
+      </div>
     </div>
-    <div class="col-3 col-sm-2 d-flex">
-      <button class="btn btn-dark col" (click)="searchComics(name.value)">
-        <i-bs [name]="icons.Search"></i-bs>
-        <span class="d-none d-sm-inline ms-1">Buscar</span>
-      </button>
-    </div>
-  </div>
+  </form>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-3">
     <div
       class="col"
